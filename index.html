@@ -308,7 +308,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;o
     <div class="stats-grid">
       <div class="stat-card reveal"><span class="stat-number c1" data-target="3">0</span><span class="stat-label" data-i18n="stat_apps">Apps</span></div>
       <div class="stat-card reveal"><span class="stat-number c2" data-target="12">0</span><span class="stat-label" data-i18n="stat_months">Months</span></div>
-      <div class="stat-card reveal"><span class="stat-number c3" data-target="50">0</span><span class="stat-label" data-i18n="stat_features">Features+</span></div>
+      <div class="stat-card reveal"><span class="stat-number c3" data-target="50">0</span><span class="stat-label" data-i18n="stat_features">Solutions+</span></div>
       <div class="stat-card reveal"><span class="stat-number c4" data-target="2">0</span><span class="stat-label" data-i18n="stat_verticals">Verticals</span></div>
     </div>
   </section>
@@ -439,7 +439,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;o
     <div class="s-section">
       <h2 data-i18n="s_overview">Overview</h2>
       <p class="s-body-text">Over the past fiscal year, I led the end-to-end experience design across Wiom's two core verticals — <strong>Customer (Demand side)</strong> and <strong>Partner (Supply side)</strong> — shaping the product experience across <strong>3 apps</strong>: the Customer App, the Partner App, and the newly launched <strong>Wiom Expert App</strong> for technicians.</p>
-      <p class="s-body-text">Across 12 months, I consistently delivered design work every sprint cycle, contributing to <strong>50+ feature releases</strong> spanning new product launches, behavioural nudge systems, incentive programs, operational tooling, payment innovations, and a full app revamp. Every deliverable was shipped within the expected sprint timelines.</p>
+      <p class="s-body-text">Across 12 months, I consistently delivered design work every sprint cycle, contributing to <strong>50+ solutions</strong> spanning new product launches, behavioural nudge systems, incentive programs, operational tooling, payment innovations, and a full app revamp. Every deliverable was shipped within the expected sprint timelines.</p>
       <p class="s-body-text">My work directly influenced key business levers — installation completion rates, partner behaviour and retention, customer onboarding conversion, fraud prevention, and the company's strategic pivot to a flexible recharge model (Recharge Wala Ghar Ka Net).</p>
     </div>
 
@@ -661,7 +661,7 @@ const hi = {
   back: '← होम', nav_title: 'FY 2025–26 असेसमेंट', switch_mode: 'मोड बदलें',
   // Fun Hero
   fun_hero: 'क्या साल रहा! ✨', fun_subtitle: '3 ऐप्स में 12 महीने की डिज़ाइन, शिपिंग और लेवल-अप',
-  stat_apps: 'ऐप्स', stat_months: 'महीने', stat_features: 'फ़ीचर्स+', stat_verticals: 'वर्टिकल्स',
+  stat_apps: 'ऐप्स', stat_months: 'महीने', stat_features: 'सॉल्यूशन्स+', stat_verticals: 'वर्टिकल्स',
   // Fun sections
   fun_timeline_title: '📅 सफ़र, महीने-दर-महीने', fun_timeline_sub: 'किसी भी महीने पर क्लिक करें',
   tab_partner: '🤝 पार्टनर साइड', tab_customer: '👤 कस्टमर साइड',
@@ -684,7 +684,7 @@ const en = {
   red_desc: 'See how wild this year really was', blue_desc: 'Get the executive summary',
   back: '← Home', nav_title: 'FY 2025–26 Assessment', switch_mode: 'Switch Mode',
   fun_hero: 'What a Year! ✨', fun_subtitle: '12 months of shipping, designing, and leveling up across 3 apps',
-  stat_apps: 'Apps', stat_months: 'Months', stat_features: 'Features+', stat_verticals: 'Verticals',
+  stat_apps: 'Apps', stat_months: 'Months', stat_features: 'Solutions+', stat_verticals: 'Verticals',
   fun_timeline_title: '📅 The Journey, Month by Month', fun_timeline_sub: 'Click on a month to see what shipped',
   tab_partner: '🤝 Partner Side', tab_customer: '👤 Customer Side',
   fun_evo_title: '📈 Evolution Stories', fun_evo_sub: 'Features that leveled up through the year',
@@ -931,7 +931,7 @@ function startCounters() {
     const interval = setInterval(() => {
       current += step;
       if (current >= target) { current = target; clearInterval(interval); }
-      el.textContent = current + (el.closest('.stat-card').querySelector('.stat-label').textContent === 'Features+' ? '+' : '');
+      el.textContent = current + (el.closest('.stat-card').querySelector('.stat-label').textContent === 'Solutions+' ? '+' : '');
     }, 40);
   });
 }
