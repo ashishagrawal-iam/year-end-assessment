@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year-End Assessment — FY 2025–26</title>
+<style>
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;overflow-x:hidden;background:#0a0a1a}
+
+/* ===== CSS VARIABLES ===== */
+:root{
+  --wiom-blue:#1A5276;--wiom-light:#EBF5FB;--wiom-dark:#2C3E50;
+  --fun-grad-1:#667eea;--fun-grad-2:#764ba2;--fun-grad-3:#f093fb;
+  --fun-bg:#0a0a1a;--fun-card:#1a1a2e;--fun-text:#e0e0ff;
+  --serious-bg:#ffffff;--serious-text:#2C3E50;--serious-accent:#1A5276;
+  --gold:#ffd700;--green:#00e676;--orange:#ff9800;--pink:#ff4081;--cyan:#00e5ff;
+}
+
+/* ===== MATRIX RAIN ===== */
+#matrix-canvas{position:fixed;inset:0;z-index:999;pointer-events:none;transition:opacity .5s}
+
+/* ===== LANDING SCREEN ===== */
+#landing{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;background:transparent;transition:opacity .8s,transform .8s}
+#landing.hidden{opacity:0;pointer-events:none;transform:scale(1.05)}
+
+/* Morpheus dialogue */
+.morpheus-scene{display:flex;flex-direction:column;align-items:center;max-width:800px;width:100%;padding:0 24px;position:relative;z-index:10}
+
+.morpheus-quote{text-align:center;margin-bottom:60px;opacity:0;animation:typeReveal 2s ease forwards}
+.morpheus-quote .quote-line{display:block;font-size:1.3rem;color:#00ff41;font-family:'Courier New',monospace;line-height:1.8;text-shadow:0 0 10px rgba(0,255,65,.4);opacity:0}
+.morpheus-quote .quote-line:nth-child(1){animation:lineReveal .8s ease .5s forwards}
+.morpheus-quote .quote-line:nth-child(2){animation:lineReveal .8s ease 1.3s forwards}
+.morpheus-quote .quote-line:nth-child(3){animation:lineReveal .8s ease 2.1s forwards}
+.morpheus-quote .quote-line:nth-child(4){animation:lineReveal .8s ease 2.9s forwards;font-size:1rem;color:#00cc33;margin-top:12px;font-style:italic}
+
+@keyframes lineReveal{from{opacity:0;transform:translateY(8px);filter:blur(2px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@keyframes typeReveal{from{opacity:0}to{opacity:1}}
+
+/* Pill container */
+.pills-container{display:flex;gap:80px;align-items:center;opacity:0;animation:pillsAppear .8s ease 3.6s forwards}
+@keyframes pillsAppear{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* The pills */
+.pill{cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:16px;transition:all .4s cubic-bezier(.25,.8,.25,1);position:relative}
+.pill:hover{transform:translateY(-12px) scale(1.08)}
+
+.pill-shape{width:80px;height:140px;border-radius:40px;position:relative;overflow:hidden;transition:all .4s}
+
+/* Red pill (Fun) */
+.pill.red .pill-shape{background:linear-gradient(180deg,#ff1744 0%,#d50000 40%,#b71c1c 100%);box-shadow:0 0 30px rgba(255,23,68,.4),0 0 60px rgba(255,23,68,.2),inset 0 -20px 30px rgba(0,0,0,.3),inset 0 10px 20px rgba(255,255,255,.2)}
+.pill.red:hover .pill-shape{box-shadow:0 0 50px rgba(255,23,68,.6),0 0 100px rgba(255,23,68,.3),inset 0 -20px 30px rgba(0,0,0,.3),inset 0 10px 20px rgba(255,255,255,.2)}
+.pill.red .pill-shape::before{content:'';position:absolute;top:8px;left:12px;width:20px;height:40px;border-radius:50%;background:rgba(255,255,255,.25);transform:rotate(-20deg)}
+.pill.red .pill-shape::after{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.1),transparent);border-radius:40px 40px 0 0}
+
+/* Blue pill (Serious) */
+.pill.blue .pill-shape{background:linear-gradient(180deg,#448aff 0%,#2962ff 40%,#1a237e 100%);box-shadow:0 0 30px rgba(68,138,255,.4),0 0 60px rgba(68,138,255,.2),inset 0 -20px 30px rgba(0,0,0,.3),inset 0 10px 20px rgba(255,255,255,.2)}
+.pill.blue:hover .pill-shape{box-shadow:0 0 50px rgba(68,138,255,.6),0 0 100px rgba(68,138,255,.3),inset 0 -20px 30px rgba(0,0,0,.3),inset 0 10px 20px rgba(255,255,255,.2)}
+.pill.blue .pill-shape::before{content:'';position:absolute;top:8px;left:12px;width:20px;height:40px;border-radius:50%;background:rgba(255,255,255,.25);transform:rotate(-20deg)}
+.pill.blue .pill-shape::after{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.1),transparent);border-radius:40px 40px 0 0}
+
+/* Floating animation */
+.pill.red .pill-shape{animation:floatRed 3s ease-in-out infinite}
+.pill.blue .pill-shape{animation:floatBlue 3s ease-in-out infinite .5s}
+@keyframes floatRed{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-8px) rotate(2deg)}}
+@keyframes floatBlue{0%,100%{transform:translateY(0) rotate(2deg)}50%{transform:translateY(-8px) rotate(-2deg)}}
+
+.pill-label{font-family:'Courier New',monospace;font-size:.85rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all .3s}
+.pill.red .pill-label{color:#ff1744;text-shadow:0 0 10px rgba(255,23,68,.5)}
+.pill.blue .pill-label{color:#448aff;text-shadow:0 0 10px rgba(68,138,255,.5)}
+.pill:hover .pill-label{letter-spacing:4px}
+
+.pill-desc{font-family:'Courier New',monospace;font-size:.7rem;color:#555;max-width:140px;text-align:center;line-height:1.4;transition:color .3s}
+.pill.red:hover .pill-desc{color:#ff5252}
+.pill.blue:hover .pill-desc{color:#82b1ff}
+
+
+/* OR divider */
+.pills-or{color:#333;font-family:'Courier New',monospace;font-size:.9rem;font-weight:700;text-shadow:0 0 8px rgba(0,255,65,.2)}
+
+/* Pill click flash */
+.pill-flash{position:fixed;inset:0;z-index:1001;opacity:0;pointer-events:none;transition:opacity .3s}
+.pill-flash.red-flash{background:radial-gradient(circle,rgba(255,23,68,.8),rgba(255,23,68,.3),transparent 70%)}
+.pill-flash.blue-flash{background:radial-gradient(circle,rgba(68,138,255,.8),rgba(68,138,255,.3),transparent 70%)}
+.pill-flash.active{opacity:1}
+
+/* ===== TOP NAV ===== */
+#topnav{position:fixed;top:0;left:0;right:0;z-index:900;padding:12px 24px;display:none;align-items:center;justify-content:space-between;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:background .3s}
+#topnav.show{display:flex}
+#topnav.fun-nav{background:rgba(10,10,26,.85)}
+#topnav.serious-nav{background:rgba(255,255,255,.9);border-bottom:1px solid #e8e8e8}
+.nav-title{font-weight:700;font-size:1rem}
+.fun-nav .nav-title{color:#e0e0ff}
+.serious-nav .nav-title{color:var(--wiom-dark)}
+.mode-switch{padding:8px 20px;border-radius:20px;border:none;cursor:pointer;font-weight:600;font-size:.85rem;transition:all .3s}
+.fun-nav .mode-switch{background:rgba(255,255,255,.15);color:#fff}
+.fun-nav .mode-switch:hover{background:rgba(255,255,255,.25)}
+.serious-nav .mode-switch{background:var(--wiom-blue);color:#fff}
+.serious-nav .mode-switch:hover{background:#154360}
+.back-btn{padding:8px 16px;border-radius:20px;border:none;cursor:pointer;font-size:.85rem;margin-right:8px;transition:all .3s}
+.fun-nav .back-btn{background:rgba(255,255,255,.1);color:#ccc}
+.serious-nav .back-btn{background:#f0f0f0;color:#666}
+
+/* Language Toggle */
+.lang-toggle{position:fixed;bottom:24px;right:24px;z-index:950;display:flex;background:rgba(20,20,40,.9);border:1px solid rgba(255,255,255,.1);border-radius:12px;overflow:hidden;backdrop-filter:blur(10px);box-shadow:0 4px 20px rgba(0,0,0,.4)}
+.lang-toggle.serious-lang{background:rgba(255,255,255,.95);border-color:#ddd;box-shadow:0 4px 20px rgba(0,0,0,.1)}
+.lang-btn{padding:8px 16px;border:none;cursor:pointer;font-size:.8rem;font-weight:700;transition:all .3s;background:transparent;color:#888}
+.lang-btn.active{background:linear-gradient(135deg,#00ff41,#00cc33);color:#000}
+.serious-lang .lang-btn.active{background:var(--wiom-blue);color:#fff}
+.serious-lang .lang-btn{color:#999}
+
+/* ===== MAIN CONTENT AREAS ===== */
+#funMode,#seriousMode{display:none;padding-top:60px}
+#funMode.active,#seriousMode.active{display:block}
+
+/* ======================================== */
+/* ===== FUN MODE ===== */
+/* ======================================== */
+.fun-hero{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px;position:relative;overflow:hidden;background:radial-gradient(ellipse at center,#1a1a3e 0%,#0a0a1a 70%)}
+.fun-hero::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(102,126,234,.15),transparent 70%);top:-100px;right:-100px;animation:pulse 4s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.1);opacity:.8}}
+
+.fun-hero h1{font-size:3.5rem;font-weight:800;background:linear-gradient(135deg,#667eea,#f093fb,#00e5ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px}
+.fun-hero .subtitle{color:#a0a0d0;font-size:1.2rem;margin-bottom:48px}
+
+/* Stats Grid */
+.stats-grid{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;margin-bottom:48px}
+.stat-card{background:var(--fun-card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px 32px;text-align:center;min-width:140px;transition:transform .3s,border-color .3s}
+.stat-card:hover{transform:translateY(-4px);border-color:rgba(102,126,234,.4)}
+.stat-number{font-size:2.5rem;font-weight:800;display:block;margin-bottom:4px}
+.stat-number.c1{color:var(--fun-grad-1)}.stat-number.c2{color:var(--pink)}.stat-number.c3{color:var(--cyan)}.stat-number.c4{color:var(--gold)}
+.stat-label{color:#888;font-size:.85rem;text-transform:uppercase;letter-spacing:1px}
+
+/* Section */
+.fun-section{padding:80px 24px;max-width:1000px;margin:0 auto}
+.fun-section-title{font-size:2rem;font-weight:700;color:#fff;margin-bottom:8px;display:flex;align-items:center;gap:12px}
+.fun-section-sub{color:#888;margin-bottom:40px;font-size:1rem}
+
+/* Tabs */
+.fun-tabs{display:flex;gap:8px;margin-bottom:32px}
+.fun-tab{padding:10px 24px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:transparent;color:#aaa;cursor:pointer;font-size:.9rem;font-weight:600;transition:all .3s}
+.fun-tab.active{background:linear-gradient(135deg,var(--fun-grad-1),var(--fun-grad-2));color:#fff;border-color:transparent}
+
+/* Timeline */
+.timeline-scroll{overflow-x:auto;padding:20px 0;margin-bottom:40px;-webkit-overflow-scrolling:touch}
+.timeline-track{display:flex;gap:0;min-width:max-content;position:relative;padding:0 20px}
+.timeline-track::before{content:'';position:absolute;top:28px;left:20px;right:20px;height:3px;background:linear-gradient(90deg,var(--fun-grad-1),var(--fun-grad-2),var(--fun-grad-3),var(--cyan));border-radius:2px}
+.timeline-node{display:flex;flex-direction:column;align-items:center;width:90px;cursor:pointer;position:relative;z-index:1;flex-shrink:0}
+.timeline-dot{width:20px;height:20px;border-radius:50%;background:var(--fun-card);border:3px solid var(--fun-grad-1);margin-bottom:12px;transition:all .3s}
+.timeline-node:hover .timeline-dot,.timeline-node.active .timeline-dot{background:var(--fun-grad-1);transform:scale(1.3);box-shadow:0 0 20px rgba(102,126,234,.5)}
+.timeline-month{color:#888;font-size:.75rem;font-weight:600;text-transform:uppercase;transition:color .3s}
+.timeline-node:hover .timeline-month,.timeline-node.active .timeline-month{color:#fff}
+
+/* Timeline detail card */
+.timeline-detail{background:var(--fun-card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px;margin-top:16px;animation:slideUp .4s ease;display:none}
+.timeline-detail.show{display:block}
+.timeline-detail h3{color:#fff;font-size:1.2rem;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.timeline-detail ul{list-style:none;padding:0}
+.timeline-detail li{color:var(--fun-text);padding:8px 0;padding-left:24px;position:relative;font-size:.9rem;line-height:1.5}
+.timeline-detail li::before{content:'▸';position:absolute;left:0;color:var(--fun-grad-1)}
+@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* Achievement Badges */
+.badges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.badge-card{background:var(--fun-card);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:24px;transition:all .4s;position:relative;overflow:hidden}
+.badge-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--fun-grad-1),var(--fun-grad-2))}
+.badge-card:hover{transform:translateY(-4px);border-color:rgba(102,126,234,.3);box-shadow:0 12px 40px rgba(102,126,234,.15)}
+.badge-icon{font-size:2.5rem;margin-bottom:12px;display:block}
+.badge-card h3{color:#fff;font-size:1.1rem;margin-bottom:6px}
+.badge-card .badge-side{font-size:.75rem;color:var(--fun-grad-1);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.badge-card p{color:#999;font-size:.85rem;line-height:1.5}
+
+/* Version Evolution */
+.evolution-item{background:var(--fun-card);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:24px;margin-bottom:16px}
+.evolution-item h4{color:#fff;font-size:1rem;margin-bottom:12px}
+.evolution-bar{display:flex;gap:4px;margin-bottom:8px}
+.evo-step{flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.06);position:relative;overflow:hidden}
+.evo-step.filled{background:linear-gradient(90deg,var(--fun-grad-1),var(--fun-grad-2))}
+.evo-step.filled.v2{background:linear-gradient(90deg,var(--fun-grad-2),var(--fun-grad-3))}
+.evo-step.filled.v3{background:linear-gradient(90deg,var(--fun-grad-3),var(--cyan))}
+.evo-step.filled.v4{background:linear-gradient(90deg,var(--cyan),var(--green))}
+.evo-labels{display:flex;justify-content:space-between;color:#666;font-size:.75rem}
+
+/* Confetti canvas */
+#confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999}
+
+/* Scroll Animation */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ======================================== */
+/* ===== SERIOUS MODE ===== */
+/* ======================================== */
+#seriousMode{background:var(--serious-bg)}
+.serious-container{max-width:860px;margin:0 auto;padding:40px 24px 80px}
+
+.serious-hero{padding:60px 0 40px;border-bottom:3px solid var(--serious-accent);margin-bottom:40px}
+.serious-hero h1{font-size:2.4rem;color:var(--serious-accent);font-weight:700}
+.serious-hero .s-subtitle{color:#7f8c8d;font-size:1.1rem;margin-top:8px}
+
+.s-section{margin-bottom:48px}
+.s-section h2{font-size:1.5rem;color:var(--serious-accent);font-weight:700;padding-bottom:12px;border-bottom:2px solid #e8e8e8;margin-bottom:20px}
+.s-section h3{font-size:1.15rem;color:var(--serious-dark);font-weight:600;margin:24px 0 12px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#f8f9fa;border-radius:8px;transition:background .3s}
+.s-section h3:hover{background:#eef2f7}
+.s-section h3 .chevron{transition:transform .3s;font-size:.8rem;color:#999}
+.s-section h3.open .chevron{transform:rotate(180deg)}
+.s-accordion-body{max-height:0;overflow:hidden;transition:max-height .4s ease;padding:0 16px}
+.s-accordion-body.open{max-height:3000px}
+.s-accordion-body p{color:var(--serious-text);line-height:1.7;margin-bottom:12px;font-size:.95rem}
+.s-accordion-body ul{margin:0 0 16px 0;padding-left:20px}
+.s-accordion-body li{color:var(--serious-text);line-height:1.7;margin-bottom:6px;font-size:.95rem}
+.s-accordion-body li strong{color:var(--wiom-dark)}
+
+.s-impact{background:var(--wiom-light);border-left:4px solid var(--serious-accent);padding:16px 20px;border-radius:0 8px 8px 0;margin:16px 0 20px;font-size:.95rem;color:var(--serious-text);line-height:1.6}
+.s-impact strong{color:var(--serious-accent)}
+.s-body-text{color:var(--serious-text);line-height:1.7;font-size:.95rem;margin-bottom:16px}
+
+/* Serious Table */
+.s-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:.9rem}
+.s-table th{background:var(--wiom-dark);color:#fff;padding:12px 16px;text-align:left;font-weight:600}
+.s-table td{padding:12px 16px;border-bottom:1px solid #e8e8e8;color:var(--serious-text)}
+.s-table tr:nth-child(even) td{background:#f8f9fa}
+.s-table tr:hover td{background:var(--wiom-light)}
+
+.s-timeline-list{padding-left:0;list-style:none}
+.s-timeline-list li{padding:8px 0;padding-left:24px;position:relative;color:var(--serious-text);font-size:.95rem;line-height:1.6}
+.s-timeline-list li::before{content:'✓';position:absolute;left:0;color:var(--serious-accent);font-weight:700}
+
+.s-footer{text-align:center;padding:40px 0;color:#999;font-style:italic;font-size:.9rem;border-top:1px solid #e8e8e8;margin-top:40px}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:700px){
+  .landing-inner{flex-direction:column;gap:20px;padding:20px}
+  .landing-title{top:30px}
+  .landing-title h1{font-size:1.6rem}
+  .mode-card{padding:32px 24px}
+  .fun-hero h1{font-size:2.2rem}
+  .stats-grid{gap:12px}
+  .stat-card{min-width:110px;padding:16px 20px}
+  .badges-grid{grid-template-columns:1fr}
+  .serious-hero h1{font-size:1.8rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== MATRIX RAIN ===== -->
+<canvas id="matrix-canvas"></canvas>
+
+<!-- ===== CONFETTI CANVAS ===== -->
+<canvas id="confetti-canvas"></canvas>
+
+<!-- ===== PILL FLASH ===== -->
+<div id="pill-flash" class="pill-flash"></div>
+
+<!-- ===== LANGUAGE TOGGLE ===== -->
+<div class="lang-toggle" id="langToggle">
+  <button class="lang-btn active" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('hi')">हि</button>
+</div>
+
+<!-- ===== LANDING SCREEN ===== -->
+<div id="landing">
+  <div class="morpheus-scene">
+    <div class="morpheus-quote">
+      <span class="quote-line" data-i18n="landing_quote">"I can only show you the year.<br>You're the one that has to see it."</span>
+      <span class="quote-line" style="margin-top:20px;font-size:1rem;color:#00cc33;opacity:0;animation:lineReveal .8s ease 1.3s forwards" data-i18n="landing_author">— Ashish Agrawal, Solution Design, 2025'26</span>
+    </div>
+
+    <div class="pills-container">
+      <div class="pill red" onclick="choosePill('fun')">
+        <div class="pill-shape"></div>
+        <span class="pill-label" data-i18n="red_pill">Red Pill</span>
+        <span class="pill-desc" data-i18n="red_desc">See how wild this year really was</span>
+      </div>
+
+      <span class="pills-or" data-i18n="or">or</span>
+
+      <div class="pill blue" onclick="choosePill('serious')">
+        <div class="pill-shape"></div>
+        <span class="pill-label" data-i18n="blue_pill">Blue Pill</span>
+        <span class="pill-desc" data-i18n="blue_desc">Get the executive summary</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOP NAV ===== -->
+<nav id="topnav">
+  <div style="display:flex;align-items:center">
+    <button class="back-btn" onclick="goHome()" data-i18n="back">← Home</button>
+    <span class="nav-title" data-i18n="nav_title">FY 2025–26 Assessment</span>
+  </div>
+  <button class="mode-switch" onclick="toggleMode()" data-i18n="switch_mode">Switch Mode</button>
+</nav>
+
+<!-- ======================================== -->
+<!-- ===== FUN MODE ===== -->
+<!-- ======================================== -->
+<div id="funMode">
+
+  <!-- Hero -->
+  <section class="fun-hero">
+    <h1 data-i18n="fun_hero">What a Year! ✨</h1>
+    <p class="subtitle" data-i18n="fun_subtitle">12 months of shipping, designing, and leveling up across 3 apps</p>
+    <div class="stats-grid">
+      <div class="stat-card reveal"><span class="stat-number c1" data-target="3">0</span><span class="stat-label" data-i18n="stat_apps">Apps</span></div>
+      <div class="stat-card reveal"><span class="stat-number c2" data-target="12">0</span><span class="stat-label" data-i18n="stat_months">Months</span></div>
+      <div class="stat-card reveal"><span class="stat-number c3" data-target="50">0</span><span class="stat-label" data-i18n="stat_features">Features+</span></div>
+      <div class="stat-card reveal"><span class="stat-number c4" data-target="2">0</span><span class="stat-label" data-i18n="stat_verticals">Verticals</span></div>
+    </div>
+  </section>
+
+  <!-- Timeline Section -->
+  <section class="fun-section reveal">
+    <div class="fun-section-title" data-i18n="fun_timeline_title">📅 The Journey, Month by Month</div>
+    <p class="fun-section-sub" data-i18n="fun_timeline_sub">Click on a month to see what shipped</p>
+
+    <div class="fun-tabs">
+      <button class="fun-tab active" onclick="switchTimelineTab('partner',this)" data-i18n="tab_partner">🤝 Partner Side</button>
+      <button class="fun-tab" onclick="switchTimelineTab('customer',this)" data-i18n="tab_customer">👤 Customer Side</button>
+    </div>
+
+    <div id="timeline-partner">
+      <div class="timeline-scroll"><div class="timeline-track" id="partner-track"></div></div>
+      <div id="partner-detail" class="timeline-detail"></div>
+    </div>
+    <div id="timeline-customer" style="display:none">
+      <div class="timeline-scroll"><div class="timeline-track" id="customer-track"></div></div>
+      <div id="customer-detail" class="timeline-detail"></div>
+    </div>
+  </section>
+
+  <!-- Version Evolution -->
+  <section class="fun-section reveal">
+    <div class="fun-section-title" data-i18n="fun_evo_title">📈 Evolution Stories</div>
+    <p class="fun-section-sub" data-i18n="fun_evo_sub">Features that leveled up through the year</p>
+
+    <div class="evolution-item">
+      <h4>🎰 Rohit Lottery — V1 → V3</h4>
+      <div class="evolution-bar">
+        <div class="evo-step filled"></div>
+        <div class="evo-step filled v2"></div>
+        <div class="evo-step filled v3"></div>
+      </div>
+      <div class="evo-labels"><span>V1 · Simple Reward</span><span>V2 · Variable + Quality Gates</span><span>V3 · Traffic Light System</span></div>
+    </div>
+    <div class="evolution-item">
+      <h4>📢 Full Page Notification (FPN) — V1 → V4</h4>
+      <div class="evolution-bar">
+        <div class="evo-step filled"></div>
+        <div class="evo-step filled v2"></div>
+        <div class="evo-step filled v3"></div>
+        <div class="evo-step filled v4"></div>
+      </div>
+      <div class="evo-labels"><span>V1 · Details</span><span>V2 · Map View</span><span>V3 · Distance Focus</span><span>V4 · Robust</span></div>
+    </div>
+    <div class="evolution-item">
+      <h4>⚡ ISP Recharge (H8) — V1 → V3 Agentic</h4>
+      <div class="evolution-bar">
+        <div class="evo-step filled"></div>
+        <div class="evo-step filled v2"></div>
+        <div class="evo-step filled v3"></div>
+      </div>
+      <div class="evo-labels"><span>V1 · Semi-Auto</span><span>V2 · Portal Preview</span><span>V3 · Fully Agentic</span></div>
+    </div>
+    <div class="evolution-item">
+      <h4>💰 PayG — Experiment → Full Pivot</h4>
+      <div class="evolution-bar">
+        <div class="evo-step filled"></div>
+        <div class="evo-step filled v2"></div>
+        <div class="evo-step filled v3"></div>
+        <div class="evo-step filled v4"></div>
+      </div>
+      <div class="evo-labels"><span>Experiment</span><span>Diwali Offer</span><span>Full Pivot</span><span>Migration</span></div>
+    </div>
+  </section>
+
+  <!-- Achievement Badges -->
+  <section class="fun-section reveal" id="achievements-section">
+    <div class="fun-section-title" data-i18n="fun_achieve_title">🏆 Achievement Unlocked</div>
+    <p class="fun-section-sub" data-i18n="fun_achieve_sub">The Top 6 initiatives that defined the year</p>
+    <div class="badges-grid">
+      <div class="badge-card reveal">
+        <span class="badge-icon">💎</span>
+        <div class="badge-side">Customer + Partner</div>
+        <h3>Recharge Wala Ghar Ka Net</h3>
+        <p>Wiom's core business model pivot — designed end-to-end across both apps. From fixed 28-day plans to flexible Pay-As-You-Go.</p>
+      </div>
+      <div class="badge-card reveal">
+        <span class="badge-icon">💬</span>
+        <div class="badge-side">Customer</div>
+        <h3>Chat-Based App Revamp</h3>
+        <p>Complete reimagination of the customer app — everything through a conversational, WhatsApp-native chat interface.</p>
+      </div>
+      <div class="badge-card reveal">
+        <span class="badge-icon">🎰</span>
+        <div class="badge-side">Partner</div>
+        <h3>Rohit Lottery V1→V3</h3>
+        <p>Evolved from a flat reward into a multi-dimensional behavioural engine driving quality, volume, and satisfaction.</p>
+      </div>
+      <div class="badge-card reveal">
+        <span class="badge-icon">🛠️</span>
+        <div class="badge-side">Partner</div>
+        <h3>Wiom Expert App</h3>
+        <p>Brand-new standalone app for technicians with wallet, task management, and professional independence.</p>
+      </div>
+      <div class="badge-card reveal">
+        <span class="badge-icon">⚡</span>
+        <div class="badge-side">Partner</div>
+        <h3>H8 Automation V1→V3</h3>
+        <p>From semi-automated to fully agentic ISP portal recharges — eliminating the most tedious daily task.</p>
+      </div>
+      <div class="badge-card reveal">
+        <span class="badge-icon">🏗️</span>
+        <div class="badge-side">Partner</div>
+        <h3>New CSP App</h3>
+        <p>Next-generation partner platform built on a new OS-based architecture for the future.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ======================================== -->
+<!-- ===== SERIOUS MODE ===== -->
+<!-- ======================================== -->
+<div id="seriousMode">
+  <div class="serious-container">
+
+    <div class="serious-hero">
+      <h1 data-i18n="s_hero">Year-End Self-Assessment</h1>
+      <p class="s-subtitle" data-i18n="s_subtitle">FY 2025–26 (April 2025 – March 2026)</p>
+    </div>
+
+    <!-- Overview -->
+    <div class="s-section">
+      <h2 data-i18n="s_overview">Overview</h2>
+      <p class="s-body-text">Over the past fiscal year, I led the end-to-end experience design across Wiom's two core verticals — <strong>Customer (Demand side)</strong> and <strong>Partner (Supply side)</strong> — shaping the product experience across <strong>3 apps</strong>: the Customer App, the Partner App, and the newly launched <strong>Wiom Expert App</strong> for technicians.</p>
+      <p class="s-body-text">Across 12 months, I consistently delivered design work every sprint cycle, contributing to <strong>50+ feature releases</strong> spanning new product launches, behavioural nudge systems, incentive programs, operational tooling, payment innovations, and a full app revamp. Every deliverable was shipped within the expected sprint timelines.</p>
+      <p class="s-body-text">My work directly influenced key business levers — installation completion rates, partner behaviour and retention, customer onboarding conversion, fraud prevention, and the company's strategic pivot to a flexible recharge model (Recharge Wala Ghar Ka Net).</p>
+    </div>
+
+    <!-- Partner Side -->
+    <div class="s-section">
+      <h2 data-i18n="s_partner_h2">A. Partner / Supply Side Achievements</h2>
+
+      <h3 class="s-accordion-trigger" onclick="toggleAccordion(this)">1. Full Page Notification (FPN) System — Iterative Evolution <span class="chevron">▼</span></h3>
+      <div class="s-accordion-body">
+        <p>Designed and iterated on the Full Page Notification system across <strong>4 major versions</strong> (Apr '25 – Nov '25), which is the primary decision-making interface for partners when a new connection arrives.</p>
+        <ul>
+          <li><strong>V1 (Apr):</strong> Introduced FPN with connection details to help partners make informed accept/reject decisions. Designed rejection reason capture for actionable ops data.</li>
+          <li><strong>V2 (May):</strong> Shifted focus to a map-based view showing the lead's position relative to existing customers — giving proximity and density value.</li>
+          <li><strong>V3 (Aug):</strong> Redesigned to surface the single most actionable data point — distance to nearest existing installation. Added cancel-prevention prompts.</li>
+          <li><strong>V4 (Sep–Nov):</strong> Improved transition experience, handled fallback states, and ensured robustness across edge cases.</li>
+        </ul>
+        <div class="s-impact"><strong>Impact:</strong> FPN became the primary lever for partner acceptance rates. Each iteration was driven by observed partner behaviour — moving from information overload to focused, actionable prompts that reduced decision friction and improved booking acceptance.</div>
+      </div>
+
+      <h3 class="s-accordion-trigger" onclick="toggleAccordion(this)">2. Rohit Lottery Program — V1 → V3 <span class="chevron">▼</span></h3>
+      <div class="s-accordion-body">
+        <p>Designed the end-to-end lottery experience across <strong>3 major versions</strong> over 6 months (Jun '25 – Nov '25), evolving it from a simple reward into a sophisticated behavioural nudge system.</p>
+        <ul>
+          <li><strong>V1 (Jun):</strong> Introduced lottery rewards with every successful task — the first gamification layer in the partner ecosystem.</li>
+          <li><strong>V1.5 (Jul):</strong> Added stacking incentives — partners earn more for completing 2 installations/day. Designed prompts to drive the "2-per-day" behaviour shift.</li>
+          <li><strong>V2 (Aug):</strong> Introduced variable reward mechanics and eligibility criteria tied to installation quality (optical power range) and customer satisfaction (rating ≥ 3/5).</li>
+          <li><strong>V3 (Nov):</strong> Introduced the traffic-light state system (Green/Yellow/Red) giving partners real-time visibility into their eligibility status.</li>
+        </ul>
+        <div class="s-impact"><strong>Impact:</strong> The lottery evolved from a flat reward into a multi-dimensional behavioural engine driving installation volume, quality compliance, and customer satisfaction. The traffic-light system shifted the dynamic from "random reward" to "earned reward."</div>
+      </div>
+
+      <h3 class="s-accordion-trigger" onclick="toggleAccordion(this)">3. Wiom Expert App — Empowering Technicians <span class="chevron">▼</span></h3>
+      <div class="s-accordion-body">
+        <p>Designed and launched a <strong>brand-new standalone app</strong> for technicians (May '25), separating their workflow from the partner app.</p>
+        <ul>
+          <li><strong>Launch (May):</strong> Core task management interface enabling technicians to manage assignments independently.</li>
+          <li><strong>Wallet (Jun):</strong> Dedicated wallet so technicians receive payments directly, with bank transfer functionality.</li>
+          <li><strong>Language Support (Sep):</strong> Multi-language capability with app-restart language switching.</li>
+        </ul>
+        <div class="s-impact"><strong>Impact:</strong> The Expert App gave technicians professional identity and direct financial empowerment. By decoupling their workflow, it reduced dependency bottlenecks and improved task completion autonomy.</div>
+      </div>
+
+      <h3 class="s-accordion-trigger" onclick="toggleAccordion(this)">4. Installation Quality & Process Enforcement <span class="chevron">▼</span></h3>
+      <div class="s-accordion-body">
+        <p>Designed a progressive system of quality gates and process improvements across the installation journey (Aug '25 – Jan '26).</p>
+        <ul>
+          <li><strong>OCS Improvement (Aug):</strong> Redesigned the device pickup checklist experience for better compliance.</li>
+          <li><strong>Out-of-Range Education & Blocking (Oct):</strong> Introduced education flows first, then hard blocks after threshold — balancing enforcement with learning.</li>
+          <li><strong>Slot-Based System (Oct → Jan):</strong> Replaced old SLA model — 4 tickets/day to accept, 2 installs/day. Evolved into the new SLA.</li>
+          <li><strong>3-Plug Installation & Photo Capture (Jan):</strong> New hardware step and upfront documentation.</li>
+        </ul>
+        <div class="s-impact"><strong>Impact:</strong> Created a layered quality enforcement system — education first, then guardrails, then hard enforcement. This respected the partner relationship while systematically raising installation standards.</div>
+      </div>
+
+      <h3 class="s-accordion-trigger" onclick="toggleAccordion(this)">5. ISP Recharge Automation (H8) — V1 to Agentic <span class="chevron">▼</span></h3>
+      <div class="s-accordion-body">
+        <p>Designed the end-to-end partner experience for automating ISP portal recharges across <strong>3 versions</strong> (Aug '25 – Feb '26).</p>
+        <ul>
+          <li><strong>V1 (Aug):</strong> First introduction of H8 automation — reducing manual portal interaction.</li>
+          <li><strong>V2 (Dec):</strong> Added live preview of H8 portal during transaction — transparency and confidence.</li>
+          <li><strong>V3 / Agentic (Feb):</strong> Fully agentic flow where the system autonomously handles portal interaction.</li>
+        </ul>
+        <div class="s-impact"><strong>Impact:</strong> Progressively eliminated the most tedious operational task — manual ISP portal recharges. Moved from semi-automated to fully agentic, saving significant daily time and reducing errors.</div>
+      </div>
+
+      <h3 class="s-accordion-trigger" onclick="toggleAccordion(this)">6. Partner Education & Trust Building <span class="chevron">▼</span></h3>
+      <div class="s-accordion-body">
+        <ul>
+          <li><strong>Incentive Visibility (Jun):</strong> Made the incentive structure transparent.</li>
+          <li><strong>Pathshala (Nov):</strong> In-app education module for features, rules, and policies.</li>
+          <li><strong>Upcoming Changes (Dec):</strong> Proactive communication before rule changes.</li>
+          <li><strong>"Wiom Earns When You Earn" (Dec):</strong> Shared-purpose messaging.</li>
+          <li><strong>Contract & Education (Jan):</strong> Partner contract experience and education flows.</li>
+          <li><strong>PayG Education & Quiz (Feb–Mar):</strong> Preparation for the PayG model shift.</li>
+        </ul>
+        <div class="s-impact"><strong>Impact:</strong> Built a culture of proactive education rather than reactive enforcement — improving compliance and reducing support escalations.</div>
+      </div>
+
+      <h3 class="s-accordion-trigger" onclick="toggleAccordion(this)">7. Operational & Platform Improvements <span class="chevron">▼</span></h3>
+      <div class="s-accordion-body">
+        <ul>
+          <li><strong>Single Device Restriction (Aug):</strong> One partner app per phone number — preventing misuse.</li>
+          <li><strong>Device Inventory (Sep–Nov):</strong> Scan-and-add devices; new proof requirements.</li>
+          <li><strong>Language Change (Sep):</strong> Multi-language support across Partner and Expert apps.</li>
+          <li><strong>Account Frozen Communication (Sep):</strong> Clear communication flows.</li>
+          <li><strong>Partner Location Capture (Jan):</strong> Address capture for future logistics.</li>
+          <li><strong>Nomenclature Update (Feb):</strong> Terminology consistency across all flows.</li>
+        </ul>
+        <div class="s-impact"><strong>Impact:</strong> Collectively reduced operational friction, prevented fraud, and created a more reliable platform experience for thousands of partners.</div>
+      </div>
+
+      <h3 class="s-accordion-trigger" onclick="toggleAccordion(this)">8. New CSP App (Mar '26) <span class="chevron">▼</span></h3>
+      <div class="s-accordion-body">
+        <p>Designed a <strong>completely new CSP/Partner App</strong> built on a new OS-based architecture — a foundational reset for the partner platform.</p>
+        <div class="s-impact"><strong>Impact:</strong> Strategic investment in the next generation of Wiom's partner tooling, designed for scalability and a modern experience framework.</div>
+      </div>
+    </div>
+
+    <!-- Customer Side -->
+    <div class="s-section">
+      <h2 data-i18n="s_customer_h2">B. Customer / Demand Side Achievements</h2>
+
+      <h3 class="s-accordion-trigger" onclick="toggleAccordion(this)">1. Booking & Onboarding Journey <span class="chevron">▼</span></h3>
+      <div class="s-accordion-body">
+        <p>Redesigned the customer booking and onboarding experience across multiple iterations (Apr '25 – Dec '25).</p>
+        <ul>
+          <li><strong>New Booking Flow (Apr):</strong> Fresh journey from scratch with improved information architecture.</li>
+          <li><strong>Post-Booking Experience (May, Aug):</strong> Iteratively improved awaiting screen, reducing customer anxiety.</li>
+          <li><strong>Real Images (Jul):</strong> Replaced illustrations with photographs — increasing trust for Bharat users.</li>
+          <li><strong>Rs. 25 Anxiety Resolution (Jul):</strong> Addressed booking fee hesitation through reassuring communication.</li>
+          <li><strong>Installation Expectations (Oct, Dec):</strong> Clear expectations about scheduling and partner call confirmation.</li>
+        </ul>
+        <div class="s-impact"><strong>Impact:</strong> The booking-to-installation journey became significantly smoother. By addressing specific anxiety points at each stage, we reduced drop-offs and improved the first-impression experience.</div>
+      </div>
+
+      <h3 class="s-accordion-trigger" onclick="toggleAccordion(this)">2. PayG / Recharge Wala Ghar Ka Net — Strategic Pivot <span class="chevron">▼</span></h3>
+      <div class="s-accordion-body">
+        <p>Led the design of Wiom's most significant product shift — from fixed 28-day plans to flexible Pay-As-You-Go recharges (Oct '25 – Mar '26).</p>
+        <ul>
+          <li><strong>Concept Introduction (Oct):</strong> First experiment with small plans (1, 2, 10 days) for a controlled group.</li>
+          <li><strong>Diwali Offer (Nov):</strong> Packaged PayG as a festive offer for controlled rollout.</li>
+          <li><strong>Use-Case Education (Dec):</strong> Handholding experiences showing real flexible recharge use cases.</li>
+          <li><strong>Full Pivot (Jan):</strong> Core offering — Rs. 100 booking + Rs. 300 installation, recharge for any number of days.</li>
+          <li><strong>Migration (Feb):</strong> Migration experience for existing customers to the new PayG model.</li>
+        </ul>
+        <div class="s-impact"><strong>Impact:</strong> The single most impactful initiative of the year. PayG fundamentally changed Wiom's value proposition from "another broadband provider" to "flexible, affordable internet for Bharat." The phased rollout ensured validation at every step.</div>
+      </div>
+
+      <h3 class="s-accordion-trigger" onclick="toggleAccordion(this)">3. Chat-Based App Revamp (Jan '26) <span class="chevron">▼</span></h3>
+      <div class="s-accordion-body">
+        <p>Designed a <strong>complete reimagination</strong> of the customer app — moving from traditional screens to a conversational, chat-based interaction model.</p>
+        <ul>
+          <li>Everything — from booking to recharge to support — now happens through chat.</li>
+          <li>Designed typing experience, message flows, and interaction patterns from the ground up.</li>
+          <li>Continued iterating through Feb–Mar based on user feedback.</li>
+        </ul>
+        <div class="s-impact"><strong>Impact:</strong> A bold design bet that simplified the entire customer journey into a single, familiar interaction pattern. For Bharat users comfortable with WhatsApp, this dramatically lowered the learning curve.</div>
+      </div>
+
+      <h3 class="s-accordion-trigger" onclick="toggleAccordion(this)">4. Payment & Plan Experience <span class="chevron">▼</span></h3>
+      <div class="s-accordion-body">
+        <ul>
+          <li><strong>Custom Checkout (Jun):</strong> Built custom checkout for more control during payments.</li>
+          <li><strong>Autopay Fix (Sep):</strong> Resolved multiple payment issues in autopay flow.</li>
+          <li><strong>Plan Selection Experiments (Sep):</strong> Tested 3 different variations of plan discovery and selection.</li>
+          <li><strong>Non-Delight to Delight Migration (Nov):</strong> Upgrade path for customers moving to better plans.</li>
+        </ul>
+        <div class="s-impact"><strong>Impact:</strong> Payment is the highest-friction moment. Each improvement directly reduced drop-offs and support tickets around payment confusion and failed transactions.</div>
+      </div>
+
+      <h3 class="s-accordion-trigger" onclick="toggleAccordion(this)">5. Service, Support & Device Recovery <span class="chevron">▼</span></h3>
+      <div class="s-accordion-body">
+        <ul>
+          <li><strong>Refund on Missed Installation (Jun):</strong> Clean, trust-preserving refund experience.</li>
+          <li><strong>Improved Service Tickets (Oct):</strong> Reopen existing tickets and create new ticket types.</li>
+          <li><strong>Router Recovery V1 (Dec):</strong> Self-service device return with refund option.</li>
+          <li><strong>Router Recovery V2 — Handshake (Mar):</strong> Proper refund handshake on device return.</li>
+        </ul>
+        <div class="s-impact"><strong>Impact:</strong> Even in failure scenarios, the experience remains respectful and transparent — critical for word-of-mouth in Bharat markets where trust is community-driven.</div>
+      </div>
+
+      <h3 class="s-accordion-trigger" onclick="toggleAccordion(this)">6. Trust, Security & Retention <span class="chevron">▼</span></h3>
+      <div class="s-accordion-body">
+        <ul>
+          <li><strong>Login Restriction (Sep):</strong> 3 phone numbers per device — preventing fraud.</li>
+          <li><strong>PlayStore Review (Nov):</strong> In-app flow to capture reviews alongside ratings.</li>
+          <li><strong>Wiom TV Cross-Promotion (Oct):</strong> Post-booking upsell nudges for controlled segments.</li>
+          <li><strong>Mobile Number Update (Jul):</strong> Self-service number update from within the app.</li>
+        </ul>
+        <div class="s-impact"><strong>Impact:</strong> Improved platform integrity, customer trust, and organic growth through better app store presence.</div>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="s-section">
+      <h2 data-i18n="s_timeline_h2">C. Timeline Performance</h2>
+      <ul class="s-timeline-list">
+        <li>Delivered design work consistently every month for 12 consecutive months — no missed sprint cycles.</li>
+        <li>Managed parallel workstreams across Customer App, Partner App, and Expert App simultaneously.</li>
+        <li>Design hand-offs completed on schedule, enabling development teams to maintain sprint velocity.</li>
+        <li>Adapted quickly to strategic pivots (PayG model, chat-based revamp) without delivery gaps.</li>
+        <li>Every major initiative delivered within its planned timeline, with iterative improvements in subsequent sprints.</li>
+      </ul>
+    </div>
+
+    <!-- Key Highlights -->
+    <div class="s-section">
+      <h2 data-i18n="s_highlights_h2">D. Key Highlights — Top Initiatives</h2>
+      <table class="s-table">
+        <thead><tr><th>#</th><th>Initiative</th><th>Side</th><th>Significance</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Recharge Wala Ghar Ka Net (PayG)</strong></td><td>Customer + Partner</td><td>Wiom's core business model pivot — designed end-to-end across both apps</td></tr>
+          <tr><td>2</td><td><strong>Chat-Based App Revamp</strong></td><td>Customer</td><td>Complete reimagination of the customer experience</td></tr>
+          <tr><td>3</td><td><strong>Rohit Lottery V1→V3</strong></td><td>Partner</td><td>Evolved from flat reward to behavioural engine driving quality + volume</td></tr>
+          <tr><td>4</td><td><strong>Wiom Expert App</strong></td><td>Partner</td><td>Brand-new app launched for technicians with wallet and independence</td></tr>
+          <tr><td>5</td><td><strong>ISP Recharge Automation V1→V3</strong></td><td>Partner</td><td>From semi-automated to fully agentic portal recharges</td></tr>
+          <tr><td>6</td><td><strong>New CSP App</strong></td><td>Partner</td><td>Next-generation partner platform on new architecture</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="s-footer" data-i18n="s_footer">Assessment Period: April 2025 – March 2026</div>
+
+  </div>
+</div>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+// ===== i18n =====
+let currentLang = 'en';
+
+const hi = {
+  // Landing
+  landing_quote: '"मैं तुम्हें सिर्फ़ ये साल दिखा सकता हूँ।<br>देखना तुम्हें ख़ुद है।"',
+  landing_author: '— आशीष अग्रवाल, सॉल्यूशन डिज़ाइन, 2025\'26',
+  red_pill: 'लाल गोली', blue_pill: 'नीली गोली', or: 'या',
+  red_desc: 'देखो इस साल कितना कुछ हुआ', blue_desc: 'एक्ज़ीक्यूटिव समरी देखें',
+  // Nav
+  back: '← होम', nav_title: 'FY 2025–26 असेसमेंट', switch_mode: 'मोड बदलें',
+  // Fun Hero
+  fun_hero: 'क्या साल रहा! ✨', fun_subtitle: '3 ऐप्स में 12 महीने की डिज़ाइन, शिपिंग और लेवल-अप',
+  stat_apps: 'ऐप्स', stat_months: 'महीने', stat_features: 'फ़ीचर्स+', stat_verticals: 'वर्टिकल्स',
+  // Fun sections
+  fun_timeline_title: '📅 सफ़र, महीने-दर-महीने', fun_timeline_sub: 'किसी भी महीने पर क्लिक करें',
+  tab_partner: '🤝 पार्टनर साइड', tab_customer: '👤 कस्टमर साइड',
+  fun_evo_title: '📈 एवोल्यूशन स्टोरीज़', fun_evo_sub: 'फ़ीचर्स जो साल भर में लेवल-अप हुए',
+  fun_achieve_title: '🏆 अचीवमेंट अनलॉक्ड', fun_achieve_sub: 'साल की टॉप 6 पहल',
+  // Serious
+  s_hero: 'साल भर का सेल्फ़-असेसमेंट', s_subtitle: 'FY 2025–26 (अप्रैल 2025 – मार्च 2026)',
+  s_overview: 'ओवरव्यू',
+  s_partner_h2: 'A. पार्टनर / सप्लाई साइड उपलब्धियाँ',
+  s_customer_h2: 'B. कस्टमर / डिमांड साइड उपलब्धियाँ',
+  s_timeline_h2: 'C. टाइमलाइन परफ़ॉर्मेंस',
+  s_highlights_h2: 'D. मुख्य हाइलाइट्स — टॉप पहल',
+  s_footer: 'असेसमेंट पीरियड: अप्रैल 2025 – मार्च 2026',
+};
+
+const en = {
+  landing_quote: '"I can only show you the year.<br>You\'re the one that has to see it."',
+  landing_author: '— Ashish Agrawal, Solution Design, 2025\'26',
+  red_pill: 'Red Pill', blue_pill: 'Blue Pill', or: 'or',
+  red_desc: 'See how wild this year really was', blue_desc: 'Get the executive summary',
+  back: '← Home', nav_title: 'FY 2025–26 Assessment', switch_mode: 'Switch Mode',
+  fun_hero: 'What a Year! ✨', fun_subtitle: '12 months of shipping, designing, and leveling up across 3 apps',
+  stat_apps: 'Apps', stat_months: 'Months', stat_features: 'Features+', stat_verticals: 'Verticals',
+  fun_timeline_title: '📅 The Journey, Month by Month', fun_timeline_sub: 'Click on a month to see what shipped',
+  tab_partner: '🤝 Partner Side', tab_customer: '👤 Customer Side',
+  fun_evo_title: '📈 Evolution Stories', fun_evo_sub: 'Features that leveled up through the year',
+  fun_achieve_title: '🏆 Achievement Unlocked', fun_achieve_sub: 'The Top 6 initiatives that defined the year',
+  s_hero: 'Year-End Self-Assessment', s_subtitle: 'FY 2025–26 (April 2025 – March 2026)',
+  s_overview: 'Overview',
+  s_partner_h2: 'A. Partner / Supply Side Achievements',
+  s_customer_h2: 'B. Customer / Demand Side Achievements',
+  s_timeline_h2: 'C. Timeline Performance',
+  s_highlights_h2: 'D. Key Highlights — Top Initiatives',
+  s_footer: 'Assessment Period: April 2025 – March 2026',
+};
+
+const translations = { en, hi };
+
+function setLang(lang) {
+  currentLang = lang;
+  const strings = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (strings[key]) el.innerHTML = strings[key];
+  });
+  // Update toggle buttons
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  // Rebuild timeline if in fun mode
+  if (currentMode === 'fun') {
+    const activeSide = document.getElementById('timeline-partner').style.display !== 'none' ? 'partner' : 'customer';
+    buildTimeline(activeSide);
+  }
+}
+
+// Hindi timeline data
+const partnerDataHi = [
+  { month: "अप्रैल", emoji: "📢", items: ["FPN V1 — पार्टनर को कनेक्शन डिटेल्स दिखाना", "रिजेक्शन का कारण कैप्चर करना", "SLA ब्रीच से बचने के लिए मल्टीपल रिमाइंडर्स"] },
+  { month: "मई", emoji: "🛠️", items: ["Wiom Expert App लॉन्च — टेक्नीशियन के लिए", "FPN V2 — मैप व्यू में लीड की पोज़ीशन", "बेहतर प्रॉम्प्ट्स — बुकिंग पर एक्शन लेने के लिए", "बुकिंग → असाइन फ़्लो सुधार (कस्टमर कॉल हटाया)"] },
+  { month: "जून", emoji: "💰", items: ["इंसेंटिव विज़िबिलिटी से पार्टनर ट्रस्ट बढ़ाना", "इंस्टॉलेशन रिवॉर्ड — उसी दिन पूरा करने पर", "टेक्नीशियन वॉलेट — बैंक ट्रांसफ़र के साथ", "रोहित लॉटरी V1 — हर सफल टास्क पर लॉटरी"] },
+  { month: "जुलाई", emoji: "🎰", items: ["लॉटरी + इंस्टॉलेशन अनुभव सुधार", "दिन में 2 इंस्टॉलेशन का इंसेंटिव सिस्टम", "शिला प्रोजेक्ट — 3rd पार्टी माइग्रेशन (शिप नहीं हुआ)"] },
+  { month: "अगस्त", emoji: "⚡", items: ["डिवाइस पिकअप पर OCS सुधार", "लॉटरी V2 — वेरिएबल रिवॉर्ड + एलिजिबिलिटी", "ऑप्टिकल पावर और रेटिंग ≥ 3/5 से लिंक", "FPN V3 — डिस्टेंस फ़ोकस्ड", "H8 ऑटोमेशन V1 शुरू", "सिंगल डिवाइस रिस्ट्रिक्शन"] },
+  { month: "सितंबर", emoji: "🌐", items: ["लैंग्वेज चेंज सपोर्ट (दोनों ऐप्स)", "अकाउंट फ़्रोज़न कम्युनिकेशन", "डिवाइस स्कैन → इन्वेंटरी में जोड़ें", "FPN ट्रांज़िशन सुधार", "स्कैन & वैलिडेट सुधार"] },
+  { month: "अक्टूबर", emoji: "📋", items: ["आउट-ऑफ़-रेंज इंस्टॉलेशन एजुकेशन + ब्लॉकिंग", "स्लॉट सिस्टम — 4 एक्सेप्ट / 2 इंस्टॉल प्रति दिन", "ISP इनफ़ो शेयरिंग सुधार", "रीट्रिगर्ड टिकट अनुभव सुधार", "प्लान चेंज नोटिफ़िकेशन"] },
+  { month: "नवंबर", emoji: "📚", items: ["पाठशाला — इन-ऐप एजुकेशन प्लेटफ़ॉर्म", "डिवाइस इन्वेंटरी प्रूफ़ ज़रूरी", "लॉटरी V3 — ग्रीन/यलो/रेड ट्रैफ़िक लाइट", "FPN फ़ॉलबैक अनुभव"] },
+  { month: "दिसंबर", emoji: "🎄", items: ["आने वाले बदलावों की एजुकेशन", "'Wiom कमाता है जब पार्टनर कमाता है'", "डिवाइस बोनस एजुकेशन", "लॉटरी अनुभव सुधार", "H8 ऑटोमेशन V2 — पोर्टल प्रीव्यू", "पार्टनर स्क्रीनशॉट (शिप नहीं हुआ)"] },
+  { month: "जनवरी", emoji: "📝", items: ["पार्टनर कॉन्ट्रैक्ट & एजुकेशन", "स्लॉट = नया SLA (स्लॉट के दिन इंस्टॉल करो या लॉटरी नहीं)", "सुधरा इंस्टॉलेशन — फ़ोटो पहले, 3-प्लग", "पार्टनर लोकेशन कैप्चर", "'नेक्स्ट स्टेप पेंडिंग' केस हैंडलिंग"] },
+  { month: "फ़रवरी", emoji: "🔄", items: ["सभी फ़्लो में नई नामकरण अपडेट", "बुकिंग & इंस्टॉलेशन पर PayG एजुकेशन", "ISP पोर्टल रीचार्ज का एजेंटिक फ़्लो (H8 V3)"] },
+  { month: "मार्च", emoji: "🚀", items: ["PayG क्विज़", "NetBox स्वैप", "नया CSP ऐप — नए OS आर्किटेक्चर पर"] },
+];
+
+const customerDataHi = [
+  { month: "अप्रैल", emoji: "🎯", items: ["नया बुकिंग फ़्लो — बेहतर IA के साथ"] },
+  { month: "मई", emoji: "⏳", items: ["पोस्ट-बुकिंग स्क्रीन सुधार", "बेहतर कम्युनिकेशन — कस्टमर चिंता कम करना"] },
+  { month: "जून", emoji: "💳", items: ["इंस्टॉलेशन फ़्लो सुधार", "कस्टम चेकआउट पेज — ज़्यादा कंट्रोल", "इंस्टॉलेशन न होने पर रिफ़ंड अनुभव"] },
+  { month: "जुलाई", emoji: "📸", items: ["ऐप से मोबाइल नंबर अपडेट", "इंस्टॉलेशन के समय प्लान अपडेट", "बुकिंग में असली फ़ोटो — इलस्ट्रेशन की जगह", "₹25 बुकिंग फ़ीस की चिंता दूर की", "शिला ऑनबोर्डिंग प्रोजेक्ट (शिप नहीं हुआ)"] },
+  { month: "अगस्त", emoji: "✨", items: ["पोस्ट-बुकिंग पेज में और सुधार"] },
+  { month: "सितंबर", emoji: "🔒", items: ["लॉगिन — प्रति डिवाइस 3 नंबर तक सीमित", "ऑटोपे की कई समस्याएँ हल", "पेमेंट अनुभव सुधार", "प्लान सिलेक्शन के 3 वेरिएशन टेस्ट", "पेमेंट हिस्ट्री सुधार"] },
+  { month: "अक्टूबर", emoji: "💡", items: ["PayG कॉन्सेप्ट — 1, 2, 10 दिन के प्लान (एक्सपेरिमेंट)", "इंस्टॉलेशन डेट की बेहतर उम्मीद", "सर्विस टिकट सुधार — रीओपन + नए टाइप", "बुकिंग के बाद Wiom TV नज (कंट्रोल्ड ग्रुप)"] },
+  { month: "नवंबर", emoji: "⭐", items: ["PlayStore रिव्यू फ़्लो — रेटिंग के साथ", "दिवाली ऑफ़र के रूप में PayG (कंट्रोल्ड ग्रुप)", "नॉन-डिलाइट से डिलाइट प्लान माइग्रेशन"] },
+  { month: "दिसंबर", emoji: "🎁", items: ["PayG V3 — यूज़-केस एजुकेशन", "एक्सपायरी के बाद 15 दिन की विंडो", "इंस्टॉलेशन डे कन्फ़र्मेशन", "PayG कस्टमर के लिए कैप्टिव पोर्टल", "राउटर रिकवरी V1 — सेल्फ़-सर्विस डिवाइस रिटर्न"] },
+  { month: "जनवरी", emoji: "💬", items: ["पूरा ऐप चैट-बेस्ड इंटरफ़ेस में बदला", "रिचार्ज वाला घर का नेट — ₹100 बुकिंग + ₹300 इंस्टॉलेशन, कितने भी दिन रिचार्ज"] },
+  { month: "फ़रवरी", emoji: "🔄", items: ["रिचार्ज वाला घर का नेट के लिए कैप्टिव पोर्टल सुधार", "चैट इंटरफ़ेस सुधार", "टाइपिंग अनुभव सुधार", "पुराने कस्टमर का PayG में माइग्रेशन"] },
+  { month: "मार्च", emoji: "🤝", items: ["राउटर रिकवरी V2 — रिफ़ंड हैंडशेक", "डिवाइस रिटर्न पर पैसे वापस सुनिश्चित"] },
+];
+
+// ===== DATA =====
+const partnerData = [
+  { month: "Apr", emoji: "📢", items: ["Full Page Notification V1 — connection details for partner decisions", "Rejection reason capture for ops analytics", "Multiple SLA reminders to protect partner bonus"] },
+  { month: "May", emoji: "🛠️", items: ["Launched Wiom Expert App for technicians", "FPN V2 — map view showing lead position vs existing customers", "Better prompts for unacted bookings", "Improved Booking → Assign flow (removed customer call step)"] },
+  { month: "Jun", emoji: "💰", items: ["Reinforced partner trust through incentive visibility", "Installation Reward — same-day completion motivation", "Technician wallet in Expert App with bank transfer", "Rohit Lottery V1 — lottery with every successful task"] },
+  { month: "Jul", emoji: "🎰", items: ["Better lottery + installation experience", "2-per-day installation incentive system", "Shila project for 3rd-party connection migration (didn't ship)"] },
+  { month: "Aug", emoji: "⚡", items: ["Improved OCS at device pickup", "Lottery V2 — variable rewards + eligibility criteria", "Eligibility tied to optical power and rating ≥ 3/5", "FPN V3 — distance-focused instead of map", "H8 Automation V1 introduced", "Single device restriction per phone number"] },
+  { month: "Sep", emoji: "🌐", items: ["Language change support (Partner + Expert apps)", "Account frozen communication flows", "Scan any device → add to inventory", "Improved FPN transitions", "Enhanced scan & validate for device pickup"] },
+  { month: "Oct", emoji: "📋", items: ["Out-of-range installation education + blocking", "Slot system — 4 accept / 2 install per day", "Better ISP info sharing for recharges", "Improved retriggered ticket experience", "Plan change notifications for partners"] },
+  { month: "Nov", emoji: "📚", items: ["Pathshala — in-app education platform", "New device inventory proof requirements", "Lottery V3 — Green/Yellow/Red traffic light system", "FPN fallback experience handled"] },
+  { month: "Dec", emoji: "🎄", items: ["Partner education for upcoming rule changes", "'Wiom earns when you earn' messaging", "Device Bonus education", "Lottery experience improvement", "H8 Automation V2 — portal preview", "Partner screenshot experience (didn't ship)"] },
+  { month: "Jan", emoji: "📝", items: ["Partner contract & education flows", "Slot = new SLA (install on slot day or lose lottery)", "Improved installation — photos upfront, 3-plug intro", "Partner location & address capture", "'Next step pending' edge case handling"] },
+  { month: "Feb", emoji: "🔄", items: ["Nomenclature updates across all flows", "PayG education at booking & installation", "Agentic flow for ISP portal recharges (H8 V3)"] },
+  { month: "Mar", emoji: "🚀", items: ["PayG Quiz for partner readiness", "NetBox Swap feature", "New CSP App — new OS-based architecture"] },
+];
+
+const customerData = [
+  { month: "Apr", emoji: "🎯", items: ["New Booking flow — fresh journey with improved IA"] },
+  { month: "May", emoji: "⏳", items: ["Improved post-booking awaiting screen", "Better communication reducing customer anxiety"] },
+  { month: "Jun", emoji: "💳", items: ["Improved Installation flow", "Custom checkout page for more payment control", "Refund experience for missed installation promise"] },
+  { month: "Jul", emoji: "📸", items: ["Mobile number update from inside the app", "Plan update at time of installation", "Real images instead of illustrations in booking", "Solved Rs. 25 booking fee anxiety", "Shila onboarding project (didn't ship)"] },
+  { month: "Aug", emoji: "✨", items: ["Further post-booking page improvements"] },
+  { month: "Sep", emoji: "🔒", items: ["Login restricted to 3 numbers per device", "Multiple autopay issues resolved", "Improved payment experience", "3 variations of plan selection tested", "Improved payment history"] },
+  { month: "Oct", emoji: "💡", items: ["PayG concept introduced — 1, 2, 10 day plans (experiment)", "Better installation date expectations", "Improved service tickets — reopen + new types", "Wiom TV nudges post-booking (controlled group)"] },
+  { month: "Nov", emoji: "⭐", items: ["PlayStore review flow alongside rating", "PayG as Diwali offer (controlled group)", "Non-delight to delight plan migration"] },
+  { month: "Dec", emoji: "🎁", items: ["PayG V3 — use-case education for flexible recharges", "15-day post-expiry window before device pickup", "Installation day confirmation expectation", "Captive Portal for PayG customers", "Router Recovery V1 — self-service device return"] },
+  { month: "Jan", emoji: "💬", items: ["Complete Chat-Based App Revamp — everything via chat", "Recharge Wala Ghar Ka Net — Rs.100 booking + Rs.300 install, recharge any days"] },
+  { month: "Feb", emoji: "🔄", items: ["Improved Captive Portal for ReWaGhKaNet", "Chat interface improvements", "Typing experience enhancements", "Old customer migration to PayG"] },
+  { month: "Mar", emoji: "🤝", items: ["Router Recovery V2 — refund handshake", "Ensuring money back on device return"] },
+];
+
+// ===== MATRIX RAIN =====
+const matrixCanvas = document.getElementById('matrix-canvas');
+const matrixCtx = matrixCanvas.getContext('2d');
+let matrixActive = true;
+
+function resizeMatrix() {
+  matrixCanvas.width = window.innerWidth;
+  matrixCanvas.height = window.innerHeight;
+}
+resizeMatrix();
+
+const matrixChars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const fontSize = 14;
+let columns = Math.floor(matrixCanvas.width / fontSize);
+let drops = Array(columns).fill(1);
+
+function drawMatrix() {
+  if (!matrixActive) return;
+  matrixCtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+  matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+  matrixCtx.fillStyle = '#00ff4120';
+  matrixCtx.font = fontSize + 'px monospace';
+
+  for (let i = 0; i < drops.length; i++) {
+    const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+    // Brighter for leading drops
+    if (Math.random() > 0.97) matrixCtx.fillStyle = '#00ff41';
+    else matrixCtx.fillStyle = 'rgba(0,255,65,0.12)';
+    matrixCtx.fillText(char, i * fontSize, drops[i] * fontSize);
+    if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) drops[i] = 0;
+    drops[i]++;
+  }
+  requestAnimationFrame(drawMatrix);
+}
+drawMatrix();
+
+window.addEventListener('resize', () => {
+  resizeMatrix();
+  columns = Math.floor(matrixCanvas.width / fontSize);
+  drops = Array(columns).fill(1);
+});
+
+// ===== MODE LOGIC =====
+let currentMode = null;
+
+function choosePill(mode) {
+  // Flash effect
+  const flash = document.getElementById('pill-flash');
+  flash.className = 'pill-flash ' + (mode === 'fun' ? 'red-flash' : 'blue-flash') + ' active';
+
+  // Stop matrix rain
+  setTimeout(() => { matrixActive = false; matrixCanvas.style.opacity = '0'; }, 300);
+
+  // Transition after flash
+  setTimeout(() => {
+    flash.classList.remove('active');
+    enterMode(mode);
+  }, 800);
+}
+
+function enterMode(mode) {
+  currentMode = mode;
+  document.getElementById('landing').classList.add('hidden');
+  const nav = document.getElementById('topnav');
+  nav.classList.add('show');
+  nav.className = 'show ' + (mode === 'fun' ? 'fun-nav' : 'serious-nav');
+
+  const langEl = document.getElementById('langToggle');
+  if (mode === 'fun') {
+    document.getElementById('funMode').classList.add('active');
+    document.getElementById('seriousMode').classList.remove('active');
+    document.body.style.background = '#0a0a1a';
+    langEl.classList.remove('serious-lang');
+    buildTimeline('partner');
+    startCounters();
+    setTimeout(() => triggerConfetti(), 800);
+  } else {
+    document.getElementById('seriousMode').classList.add('active');
+    document.getElementById('funMode').classList.remove('active');
+    document.body.style.background = '#ffffff';
+    langEl.classList.add('serious-lang');
+  }
+  window.scrollTo(0, 0);
+}
+
+function toggleMode() {
+  const newMode = currentMode === 'fun' ? 'serious' : 'fun';
+  document.getElementById('funMode').classList.remove('active');
+  document.getElementById('seriousMode').classList.remove('active');
+  enterMode(newMode);
+}
+
+function goHome() {
+  document.getElementById('funMode').classList.remove('active');
+  document.getElementById('seriousMode').classList.remove('active');
+  document.getElementById('topnav').classList.remove('show');
+  document.getElementById('topnav').className = '';
+  document.getElementById('landing').classList.remove('hidden');
+  document.getElementById('langToggle').classList.remove('serious-lang');
+  document.body.style.background = '#0a0a1a';
+  currentMode = null;
+  // Restart matrix rain
+  matrixActive = true;
+  matrixCanvas.style.opacity = '1';
+  matrixCanvas.style.transition = 'opacity .5s';
+  drawMatrix();
+  window.scrollTo(0, 0);
+}
+
+// ===== TIMELINE =====
+function buildTimeline(side) {
+  const isHi = currentLang === 'hi';
+  const data = side === 'partner' ? (isHi ? partnerDataHi : partnerData) : (isHi ? customerDataHi : customerData);
+  const trackId = side + '-track';
+  const detailId = side + '-detail';
+  const track = document.getElementById(trackId);
+  const detail = document.getElementById(detailId);
+  track.innerHTML = '';
+  detail.classList.remove('show');
+  detail.innerHTML = '';
+
+  data.forEach((m, i) => {
+    const node = document.createElement('div');
+    node.className = 'timeline-node';
+    node.innerHTML = `<div class="timeline-dot"></div><span class="timeline-month">${m.month}</span>`;
+    node.addEventListener('click', () => {
+      track.querySelectorAll('.timeline-node').forEach(n => n.classList.remove('active'));
+      node.classList.add('active');
+      detail.innerHTML = `<h3>${m.emoji} ${m.month} '${m.month === 'Jan' || m.month === 'Feb' || m.month === 'Mar' ? '26' : '25'}</h3><ul>${m.items.map(it => `<li>${it}</li>`).join('')}</ul>`;
+      detail.classList.add('show');
+    });
+    track.appendChild(node);
+  });
+}
+
+function switchTimelineTab(side, btn) {
+  document.querySelectorAll('.fun-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('timeline-partner').style.display = side === 'partner' ? 'block' : 'none';
+  document.getElementById('timeline-customer').style.display = side === 'customer' ? 'block' : 'none';
+  buildTimeline(side);
+}
+
+// ===== ANIMATED COUNTERS =====
+function startCounters() {
+  document.querySelectorAll('.stat-number[data-target]').forEach(el => {
+    const target = parseInt(el.dataset.target);
+    let current = 0;
+    const step = Math.max(1, Math.floor(target / 40));
+    const interval = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(interval); }
+      el.textContent = current + (el.closest('.stat-card').querySelector('.stat-label').textContent === 'Features+' ? '+' : '');
+    }, 40);
+  });
+}
+
+// ===== SERIOUS MODE ACCORDION =====
+function toggleAccordion(header) {
+  const body = header.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.s-accordion-body').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('.s-accordion-trigger').forEach(h => h.classList.remove('open'));
+  // Toggle current
+  if (!isOpen) {
+    body.classList.add('open');
+    header.classList.add('open');
+  }
+}
+
+// ===== SCROLL REVEAL =====
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // Confetti on achievements section
+      if (entry.target.id === 'achievements-section') triggerConfetti();
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ===== CONFETTI =====
+const canvas = document.getElementById('confetti-canvas');
+const ctx = canvas.getContext('2d');
+let confettiPieces = [];
+let confettiActive = false;
+
+function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+function triggerConfetti() {
+  if (currentMode !== 'fun') return;
+  confettiPieces = [];
+  const colors = ['#667eea','#764ba2','#f093fb','#00e5ff','#ffd700','#ff4081','#00e676'];
+  for (let i = 0; i < 120; i++) {
+    confettiPieces.push({
+      x: Math.random() * canvas.width,
+      y: -20 - Math.random() * 200,
+      w: 6 + Math.random() * 6,
+      h: 4 + Math.random() * 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      vx: (Math.random() - .5) * 4,
+      vy: 2 + Math.random() * 4,
+      rot: Math.random() * Math.PI * 2,
+      rotSpeed: (Math.random() - .5) * .2,
+      life: 1,
+    });
+  }
+  if (!confettiActive) { confettiActive = true; animateConfetti(); }
+}
+
+function animateConfetti() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  confettiPieces = confettiPieces.filter(p => p.life > 0);
+  if (confettiPieces.length === 0) { confettiActive = false; return; }
+  confettiPieces.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += .05;
+    p.rot += p.rotSpeed;
+    p.life -= .005;
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+    ctx.globalAlpha = p.life;
+    ctx.fillStyle = p.color;
+    ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+    ctx.restore();
+  });
+  requestAnimationFrame(animateConfetti);
+}
+</script>
+
+</body>
+</html>
