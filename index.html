@@ -173,21 +173,50 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;o
 .badge-card p{color:#999;font-size:.85rem;line-height:1.5}
 
 /* AI Section - Fun Mode */
-.ai-section-wrap{background:linear-gradient(135deg,rgba(102,126,234,.08),rgba(118,75,162,.08));border:1px solid rgba(102,126,234,.15);border-radius:20px;padding:36px;position:relative;overflow:hidden}
-.ai-section-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#00ff88,#00d4ff,#667eea,#764ba2)}
-.ai-glow{position:absolute;width:200px;height:200px;border-radius:50%;filter:blur(80px);opacity:.12;pointer-events:none}
-.ai-glow-1{background:#00ff88;top:-40px;right:-40px}
-.ai-glow-2{background:#00d4ff;bottom:-40px;left:-40px}
-.ai-badge-tag{display:inline-block;background:linear-gradient(135deg,#00ff88,#00d4ff);color:#0a0a1a;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:2px;padding:4px 12px;border-radius:20px;margin-bottom:16px}
-.ai-title{color:#fff;font-size:1.6rem;font-weight:800;margin-bottom:8px}
-.ai-subtitle{color:#999;font-size:.95rem;margin-bottom:28px}
-.ai-pillars{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
-.ai-pillar{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px;transition:all .4s;position:relative}
-.ai-pillar:hover{transform:translateY(-3px);border-color:rgba(0,255,136,.2);box-shadow:0 8px 30px rgba(0,255,136,.08)}
-.ai-pillar-icon{font-size:2rem;margin-bottom:10px;display:block}
-.ai-pillar h4{color:#fff;font-size:.95rem;margin-bottom:6px}
-.ai-pillar p{color:#888;font-size:.82rem;line-height:1.5}
-.ai-pillar-tag{display:inline-block;font-size:.6rem;color:#00ff88;background:rgba(0,255,136,.1);padding:2px 8px;border-radius:10px;margin-top:8px;text-transform:uppercase;letter-spacing:1px;font-weight:700}
+.ai-outer{position:relative;overflow:hidden}
+.ai-scanline{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#00ff88,transparent);opacity:.6;animation:scanDown 3s linear infinite;pointer-events:none;z-index:2}
+@keyframes scanDown{0%{top:-2px}100%{top:100%}}
+/* Terminal */
+.ai-terminal{background:#0a0e14;border:1px solid #1a2a1a;border-radius:14px;overflow:hidden;margin-bottom:28px;box-shadow:0 0 40px rgba(0,255,136,.06)}
+.ai-terminal-bar{background:#111;padding:8px 14px;display:flex;align-items:center;gap:8px}
+.ai-terminal-dot{width:10px;height:10px;border-radius:50%}
+.ai-terminal-dot.r{background:#ff5f57}.ai-terminal-dot.y{background:#febc2e}.ai-terminal-dot.g{background:#28c840}
+.ai-terminal-title{color:#555;font-size:.7rem;font-family:'Courier New',monospace;margin-left:8px;letter-spacing:1px}
+.ai-terminal-body{padding:20px 24px;font-family:'Courier New',monospace;font-size:.82rem;line-height:2;min-height:180px}
+.ai-line{opacity:0;transform:translateX(-8px);color:#00ff88}
+.ai-line.typed{opacity:1;transform:translateX(0);transition:all .3s}
+.ai-line .ai-prompt{color:#667eea}
+.ai-line .ai-ok{color:#00ff88}
+.ai-line .ai-val{color:#ffd700}
+.ai-line .ai-info{color:#888}
+.ai-cursor{display:inline-block;width:8px;height:14px;background:#00ff88;animation:blink 1s step-end infinite;vertical-align:middle;margin-left:2px}
+@keyframes blink{50%{opacity:0}}
+.ai-status-bar{background:#111;padding:6px 14px;display:flex;justify-content:space-between;font-family:'Courier New',monospace;font-size:.65rem;color:#555}
+.ai-status-bar .online{color:#00ff88}
+/* Flip Cards */
+.ai-flip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.ai-flip-card{height:280px;perspective:1000px;cursor:pointer}
+.ai-flip-inner{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.4,.2,.2,1);transform-style:preserve-3d}
+.ai-flip-card:hover .ai-flip-inner,.ai-flip-card.flipped .ai-flip-inner{transform:rotateY(180deg)}
+.ai-flip-front,.ai-flip-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:16px;padding:24px;display:flex;flex-direction:column;justify-content:center}
+.ai-flip-front{background:linear-gradient(145deg,#1a1a2e,#16213e);border:1px solid rgba(255,255,255,.06)}
+.ai-flip-front .ai-flip-emoji{font-size:2.8rem;margin-bottom:14px}
+.ai-flip-front .ai-flip-label{color:#ff4d6a;font-size:.6rem;text-transform:uppercase;letter-spacing:3px;font-weight:800;margin-bottom:8px}
+.ai-flip-front h4{color:#fff;font-size:1.05rem;margin-bottom:8px}
+.ai-flip-front p{color:#666;font-size:.82rem;line-height:1.5}
+.ai-flip-front .ai-flip-hint{position:absolute;bottom:14px;right:18px;color:#444;font-size:.65rem}
+.ai-flip-back{background:linear-gradient(145deg,#0a2a1a,#0a1a2e);border:1px solid rgba(0,255,136,.15);transform:rotateY(180deg)}
+.ai-flip-back .ai-flip-emoji{font-size:2.8rem;margin-bottom:14px}
+.ai-flip-back .ai-flip-label{color:#00ff88;font-size:.6rem;text-transform:uppercase;letter-spacing:3px;font-weight:800;margin-bottom:8px}
+.ai-flip-back h4{color:#00ff88;font-size:1.05rem;margin-bottom:8px}
+.ai-flip-back p{color:#aaa;font-size:.82rem;line-height:1.5}
+.ai-flip-back .ai-flip-tag{display:inline-block;margin-top:10px;font-size:.6rem;color:#0a0a1a;background:linear-gradient(135deg,#00ff88,#00d4ff);padding:3px 10px;border-radius:10px;text-transform:uppercase;letter-spacing:1px;font-weight:800}
+/* Section header */
+.ai-section-header{text-align:center;margin-bottom:32px;position:relative}
+.ai-section-header .ai-badge-tag{display:inline-block;background:linear-gradient(135deg,#00ff88,#00d4ff);color:#0a0a1a;font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:3px;padding:5px 16px;border-radius:20px;margin-bottom:14px}
+.ai-section-header h2{color:#fff;font-size:1.8rem;font-weight:800;margin-bottom:6px}
+.ai-section-header p{color:#666;font-size:.9rem}
+.ai-tap-hint{text-align:center;color:#444;font-size:.75rem;margin-top:20px;font-style:italic}
 /* AI Section - Serious Mode */
 .s-ai-section{background:linear-gradient(135deg,#f0f9ff,#e8f4fd);border:2px solid #bde0fe;border-radius:12px;padding:32px;margin-top:16px}
 .s-ai-header{display:flex;align-items:center;gap:12px;margin-bottom:8px}
@@ -452,38 +481,115 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;o
 
   <!-- AI-Powered Design Section -->
   <section class="fun-section reveal" id="ai-section">
-    <div class="ai-section-wrap">
-      <div class="ai-glow ai-glow-1"></div>
-      <div class="ai-glow ai-glow-2"></div>
-      <div class="ai-badge-tag" data-i18n="ai_badge">🤖 New Superpower — Feb '26 Onwards</div>
-      <div class="ai-title" data-i18n="ai_fun_title">AI Entered the Chat.</div>
-      <div class="ai-subtitle" data-i18n="ai_fun_sub">From Feb '26, AI became a core part of the design-to-production pipeline — not a side experiment, but a daily tool reshaping how we ship.</div>
-      <div class="ai-pillars">
-        <div class="ai-pillar reveal">
-          <span class="ai-pillar-icon">🚀</span>
-          <h4 data-i18n="ai_p1_title">Direct Production Changes</h4>
-          <p data-i18n="ai_p1_desc">AI-assisted code changes pushed directly to production — no more waiting for dev cycles for design improvements. Faster iteration, real-time fixes.</p>
-          <span class="ai-pillar-tag" data-i18n="ai_p1_tag">Speed × Impact</span>
+    <div class="ai-outer">
+      <div class="ai-scanline"></div>
+
+      <div class="ai-section-header">
+        <div class="ai-badge-tag" data-i18n="ai_badge">🤖 New Superpower — Feb '26 Onwards</div>
+        <h2 data-i18n="ai_fun_title">AI Entered the Chat.</h2>
+        <p data-i18n="ai_fun_sub">From Feb '26, AI became a core part of the design-to-production pipeline — not a side experiment, but a daily tool reshaping how we ship.</p>
+      </div>
+
+      <!-- Terminal Boot Sequence -->
+      <div class="ai-terminal" id="aiTerminal">
+        <div class="ai-terminal-bar">
+          <span class="ai-terminal-dot r"></span><span class="ai-terminal-dot y"></span><span class="ai-terminal-dot g"></span>
+          <span class="ai-terminal-title">wiom-design-system — ai-init.sh</span>
         </div>
-        <div class="ai-pillar reveal">
-          <span class="ai-pillar-icon">🎨</span>
-          <h4 data-i18n="ai_p2_title">Production-Ready Front-End</h4>
-          <p data-i18n="ai_p2_desc">Created front-end experiences using AI that are directly usable with the production codebase — bridging the design-to-dev gap entirely.</p>
-          <span class="ai-pillar-tag" data-i18n="ai_p2_tag">Design → Code → Ship</span>
+        <div class="ai-terminal-body" id="terminalBody">
+          <div class="ai-line" data-delay="200"><span class="ai-prompt">$</span> <span class="ai-info">initializing ai-design-pipeline...</span></div>
+          <div class="ai-line" data-delay="600"><span class="ai-ok">[✓]</span> Module loaded: <span class="ai-val">direct-production-push</span></div>
+          <div class="ai-line" data-delay="1000"><span class="ai-ok">[✓]</span> Module loaded: <span class="ai-val">frontend-code-generator</span></div>
+          <div class="ai-line" data-delay="1400"><span class="ai-ok">[✓]</span> Module loaded: <span class="ai-val">build-spec-prototyper</span></div>
+          <div class="ai-line" data-delay="1800"><span class="ai-ok">[✓]</span> Module loaded: <span class="ai-val">automated-uat-engine</span></div>
+          <div class="ai-line" data-delay="2200"><span class="ai-prompt">$</span> <span class="ai-info">all systems operational.</span> <span class="ai-val">Design velocity: 10x</span></div>
+          <div class="ai-line" data-delay="2600"><span class="ai-ok">&gt;&gt;</span> <span style="color:#fff;font-weight:bold">Ready to ship.</span> <span class="ai-cursor"></span></div>
         </div>
-        <div class="ai-pillar reveal">
-          <span class="ai-pillar-icon">📐</span>
-          <h4 data-i18n="ai_p3_title">Build-Spec Prototyping</h4>
-          <p data-i18n="ai_p3_desc">Prototyping now follows build-specs — structured rules and operating systems that ensure every solution is grounded in constraints, not just creativity.</p>
-          <span class="ai-pillar-tag" data-i18n="ai_p3_tag">Rules-First Design</span>
-        </div>
-        <div class="ai-pillar reveal">
-          <span class="ai-pillar-icon">✅</span>
-          <h4 data-i18n="ai_p4_title">Fully Automated UAT</h4>
-          <p data-i18n="ai_p4_desc">User Acceptance Testing is now fully automated — AI validates flows, catches regressions, and frees up cycles that were spent on manual testing.</p>
-          <span class="ai-pillar-tag" data-i18n="ai_p4_tag">Zero Manual QA</span>
+        <div class="ai-status-bar">
+          <span><span class="online">● ONLINE</span> — Feb 2026</span>
+          <span>4 modules | 0 errors | pipeline active</span>
         </div>
       </div>
+
+      <!-- Before/After Flip Cards -->
+      <div class="ai-flip-grid">
+        <div class="ai-flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="ai-flip-inner">
+            <div class="ai-flip-front">
+              <div class="ai-flip-label">Before AI</div>
+              <div class="ai-flip-emoji">🐌</div>
+              <h4>Design → Handoff → Wait → Dev → Deploy</h4>
+              <p>Changes went through full dev cycles. Small design fixes took sprints to reach production.</p>
+              <span class="ai-flip-hint">tap to flip →</span>
+            </div>
+            <div class="ai-flip-back">
+              <div class="ai-flip-label">After AI</div>
+              <div class="ai-flip-emoji">⚡</div>
+              <h4 data-i18n="ai_p1_title">Direct Production Changes</h4>
+              <p data-i18n="ai_p1_desc">AI-assisted code changes pushed directly to production — no more waiting for dev cycles for design improvements. Faster iteration, real-time fixes.</p>
+              <span class="ai-flip-tag" data-i18n="ai_p1_tag">Speed × Impact</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ai-flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="ai-flip-inner">
+            <div class="ai-flip-front">
+              <div class="ai-flip-label">Before AI</div>
+              <div class="ai-flip-emoji">🖼️</div>
+              <h4>Figma Mockup → Redline → Dev Interpretation</h4>
+              <p>Designs were static specs. Devs had to re-interpret and rebuild every pixel from scratch.</p>
+              <span class="ai-flip-hint">tap to flip →</span>
+            </div>
+            <div class="ai-flip-back">
+              <div class="ai-flip-label">After AI</div>
+              <div class="ai-flip-emoji">🎨</div>
+              <h4 data-i18n="ai_p2_title">Production-Ready Front-End</h4>
+              <p data-i18n="ai_p2_desc">Created front-end experiences using AI that are directly usable with the production codebase — bridging the design-to-dev gap entirely.</p>
+              <span class="ai-flip-tag" data-i18n="ai_p2_tag">Design → Code → Ship</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ai-flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="ai-flip-inner">
+            <div class="ai-flip-front">
+              <div class="ai-flip-label">Before AI</div>
+              <div class="ai-flip-emoji">🎲</div>
+              <h4>Prototype First, Rules Later</h4>
+              <p>Prototypes were creative-first. Constraints and system rules were applied after the fact, causing rework.</p>
+              <span class="ai-flip-hint">tap to flip →</span>
+            </div>
+            <div class="ai-flip-back">
+              <div class="ai-flip-label">After AI</div>
+              <div class="ai-flip-emoji">📐</div>
+              <h4 data-i18n="ai_p3_title">Build-Spec Prototyping</h4>
+              <p data-i18n="ai_p3_desc">Prototyping now follows build-specs — structured rules and operating systems that ensure every solution is grounded in constraints, not just creativity.</p>
+              <span class="ai-flip-tag" data-i18n="ai_p3_tag">Rules-First Design</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ai-flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="ai-flip-inner">
+            <div class="ai-flip-front">
+              <div class="ai-flip-label">Before AI</div>
+              <div class="ai-flip-emoji">👆</div>
+              <h4>Manual Click-Through Testing</h4>
+              <p>Every flow was tested manually — screen by screen, tap by tap. Time-consuming, error-prone, and repetitive.</p>
+              <span class="ai-flip-hint">tap to flip →</span>
+            </div>
+            <div class="ai-flip-back">
+              <div class="ai-flip-label">After AI</div>
+              <div class="ai-flip-emoji">✅</div>
+              <h4 data-i18n="ai_p4_title">Fully Automated UAT</h4>
+              <p data-i18n="ai_p4_desc">User Acceptance Testing is now fully automated — AI validates flows, catches regressions, and frees up cycles that were spent on manual testing.</p>
+              <span class="ai-flip-tag" data-i18n="ai_p4_tag">Zero Manual QA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="ai-tap-hint">← Hover or tap cards to see the transformation →</p>
     </div>
   </section>
 
@@ -1074,7 +1180,7 @@ const revealObserver = new IntersectionObserver((entries) => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
       // Confetti on achievements section
-      if (entry.target.id === 'achievements-section') triggerConfetti();
+      if (entry.target.id === 'achievements-section' || entry.target.id === 'ai-section') triggerConfetti();
     }
   });
 }, { threshold: 0.15 });
@@ -1132,6 +1238,23 @@ function animateConfetti() {
   });
   requestAnimationFrame(animateConfetti);
 }
+
+// ===== AI TERMINAL BOOT ANIMATION =====
+let terminalBooted = false;
+const terminalObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !terminalBooted) {
+      terminalBooted = true;
+      const lines = document.querySelectorAll('#terminalBody .ai-line');
+      lines.forEach(line => {
+        const delay = parseInt(line.dataset.delay) || 0;
+        setTimeout(() => { line.classList.add('typed'); }, delay);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+const termEl = document.getElementById('aiTerminal');
+if (termEl) terminalObserver.observe(termEl);
 </script>
 
 </body>
