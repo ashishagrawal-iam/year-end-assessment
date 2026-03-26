@@ -139,27 +139,47 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;o
 .fun-section-sub{color:#888;margin-bottom:40px;font-size:1rem}
 
 /* Tabs */
-.fun-tabs{display:flex;gap:8px;margin-bottom:32px}
-.fun-tab{padding:10px 24px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:transparent;color:#aaa;cursor:pointer;font-size:.9rem;font-weight:600;transition:all .3s}
-.fun-tab.active{background:linear-gradient(135deg,var(--fun-grad-1),var(--fun-grad-2));color:#fff;border-color:transparent}
+.fun-tabs{display:flex;gap:4px;margin-bottom:32px;background:rgba(255,255,255,.04);border-radius:14px;padding:4px;border:1px solid rgba(255,255,255,.06);position:relative;width:fit-content}
+.fun-tab{padding:12px 28px;border-radius:11px;border:none;background:transparent;color:#666;cursor:pointer;font-size:.9rem;font-weight:700;transition:all .3s;position:relative;z-index:1}
+.fun-tab.active{background:linear-gradient(135deg,var(--fun-grad-1),var(--fun-grad-2));color:#fff;box-shadow:0 4px 20px rgba(102,126,234,.4)}
+.fun-tab:not(.active):hover{color:#bbb;background:rgba(255,255,255,.04)}
+.fun-tabs-hint{color:#555;font-size:.7rem;margin-left:12px;display:flex;align-items:center;gap:4px;animation:hintPulse 2s ease infinite}
+@keyframes hintPulse{0%,100%{opacity:.5}50%{opacity:1}}
 
 /* Timeline */
-.timeline-scroll{overflow-x:auto;padding:20px 0;margin-bottom:40px;-webkit-overflow-scrolling:touch}
+.timeline-instruction{text-align:center;margin-bottom:20px;padding:12px 20px;background:rgba(102,126,234,.08);border:1px solid rgba(102,126,234,.15);border-radius:12px;display:flex;align-items:center;justify-content:center;gap:8px}
+.timeline-instruction span{color:#aaa;font-size:.82rem}
+.timeline-instruction .ti-arrow{color:var(--fun-grad-1);animation:bounceRight 1.5s ease infinite}
+@keyframes bounceRight{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+.timeline-scroll{overflow-x:auto;padding:20px 0;margin-bottom:20px;-webkit-overflow-scrolling:touch}
 .timeline-track{display:flex;gap:0;min-width:max-content;position:relative;padding:0 20px}
-.timeline-track::before{content:'';position:absolute;top:28px;left:20px;right:20px;height:3px;background:linear-gradient(90deg,var(--fun-grad-1),var(--fun-grad-2),var(--fun-grad-3),var(--cyan));border-radius:2px}
-.timeline-node{display:flex;flex-direction:column;align-items:center;width:90px;cursor:pointer;position:relative;z-index:1;flex-shrink:0}
-.timeline-dot{width:20px;height:20px;border-radius:50%;background:var(--fun-card);border:3px solid var(--fun-grad-1);margin-bottom:12px;transition:all .3s}
-.timeline-node:hover .timeline-dot,.timeline-node.active .timeline-dot{background:var(--fun-grad-1);transform:scale(1.3);box-shadow:0 0 20px rgba(102,126,234,.5)}
+.timeline-track::before{content:'';position:absolute;top:36px;left:20px;right:20px;height:3px;background:linear-gradient(90deg,var(--fun-grad-1),var(--fun-grad-2),var(--fun-grad-3),var(--cyan));border-radius:2px}
+.timeline-node{display:flex;flex-direction:column;align-items:center;width:100px;cursor:pointer;position:relative;z-index:1;flex-shrink:0;padding-top:8px}
+.timeline-dot{width:24px;height:24px;border-radius:50%;background:var(--fun-card);border:3px solid var(--fun-grad-1);margin-bottom:12px;transition:all .3s;position:relative}
+.timeline-dot::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(102,126,234,.3);opacity:0;transition:opacity .3s}
+.timeline-node:hover .timeline-dot::after{opacity:1}
+.timeline-node:hover .timeline-dot,.timeline-node.active .timeline-dot{background:var(--fun-grad-1);transform:scale(1.3);box-shadow:0 0 24px rgba(102,126,234,.5)}
+.timeline-node.active .timeline-dot::after{opacity:1;border-color:rgba(102,126,234,.5);animation:dotRing 2s ease infinite}
+@keyframes dotRing{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.3);opacity:0}}
 .timeline-month{color:#888;font-size:.75rem;font-weight:600;text-transform:uppercase;transition:color .3s}
-.timeline-node:hover .timeline-month,.timeline-node.active .timeline-month{color:#fff}
+.timeline-node:hover .timeline-month,.timeline-node.active .timeline-month{color:#fff;font-weight:800}
+/* First dot pulse to attract attention */
+.timeline-node.first-hint .timeline-dot{animation:firstHint 2s ease infinite}
+@keyframes firstHint{0%,100%{box-shadow:0 0 0 0 rgba(102,126,234,.4)}50%{box-shadow:0 0 0 12px rgba(102,126,234,0)}}
 
 /* Timeline detail card */
-.timeline-detail{background:var(--fun-card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px;margin-top:16px;animation:slideUp .4s ease;display:none}
+.timeline-detail{background:var(--fun-card);border:1px solid rgba(102,126,234,.15);border-radius:16px;padding:28px;margin-top:16px;animation:slideUp .4s ease;display:none;position:relative}
 .timeline-detail.show{display:block}
+.timeline-detail::before{content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:16px;height:16px;background:var(--fun-card);border-left:1px solid rgba(102,126,234,.15);border-top:1px solid rgba(102,126,234,.15);rotate:45deg}
 .timeline-detail h3{color:#fff;font-size:1.2rem;margin-bottom:16px;display:flex;align-items:center;gap:8px}
 .timeline-detail ul{list-style:none;padding:0}
 .timeline-detail li{color:var(--fun-text);padding:8px 0;padding-left:24px;position:relative;font-size:.9rem;line-height:1.5}
 .timeline-detail li::before{content:'▸';position:absolute;left:0;color:var(--fun-grad-1)}
+/* Empty state when nothing selected */
+.timeline-empty{text-align:center;padding:48px 20px;color:#444;font-size:.9rem;border:2px dashed rgba(255,255,255,.06);border-radius:16px;margin-top:16px}
+.timeline-empty .te-icon{font-size:2.5rem;margin-bottom:12px;display:block}
+.timeline-empty .te-arrow{display:inline-block;animation:bounceUp 1.5s ease infinite;margin-top:8px;color:var(--fun-grad-1)}
+@keyframes bounceUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 
 /* Achievement Badges */
@@ -457,18 +477,37 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;o
     <div class="fun-section-title" data-i18n="fun_timeline_title">📅 The Journey, Month by Month</div>
     <p class="fun-section-sub" data-i18n="fun_timeline_sub">Click on a month to see what shipped</p>
 
-    <div class="fun-tabs">
-      <button class="fun-tab active" onclick="switchTimelineTab('partner',this)" data-i18n="tab_partner">🤝 Partner Side</button>
-      <button class="fun-tab" onclick="switchTimelineTab('customer',this)" data-i18n="tab_customer">👤 Customer Side</button>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:24px">
+      <div class="fun-tabs">
+        <button class="fun-tab active" onclick="switchTimelineTab('partner',this)" data-i18n="tab_partner">🤝 Partner Side</button>
+        <button class="fun-tab" onclick="switchTimelineTab('customer',this)" data-i18n="tab_customer">👤 Customer Side</button>
+      </div>
+      <span class="fun-tabs-hint" data-i18n="tabs_hint">← switch to see both sides</span>
+    </div>
+
+    <div class="timeline-instruction" id="timelineInstruction">
+      <span class="ti-arrow">👆</span>
+      <span data-i18n="timeline_tap_hint">Tap any month below to see what was shipped</span>
+      <span class="ti-arrow">👆</span>
     </div>
 
     <div id="timeline-partner">
       <div class="timeline-scroll"><div class="timeline-track" id="partner-track"></div></div>
       <div id="partner-detail" class="timeline-detail"></div>
+      <div id="partner-empty" class="timeline-empty">
+        <span class="te-icon">👆</span>
+        <span data-i18n="timeline_empty">Pick a month above to explore what shipped</span>
+        <span class="te-arrow">↑</span>
+      </div>
     </div>
     <div id="timeline-customer" style="display:none">
       <div class="timeline-scroll"><div class="timeline-track" id="customer-track"></div></div>
       <div id="customer-detail" class="timeline-detail"></div>
+      <div id="customer-empty" class="timeline-empty">
+        <span class="te-icon">👆</span>
+        <span data-i18n="timeline_empty">Pick a month above to explore what shipped</span>
+        <span class="te-arrow">↑</span>
+      </div>
     </div>
   </section>
 
@@ -969,6 +1008,9 @@ const hi = {
   // Fun sections
   fun_timeline_title: '📅 सफ़र, महीने-दर-महीने', fun_timeline_sub: 'किसी भी महीने पर क्लिक करें',
   tab_partner: '🤝 पार्टनर साइड', tab_customer: '👤 कस्टमर साइड',
+  tabs_hint: '← दोनों साइड देखने के लिए स्विच करें',
+  timeline_tap_hint: 'नीचे किसी भी महीने पर टैप करें और देखें क्या शिप हुआ',
+  timeline_empty: 'ऊपर कोई महीना चुनें और जानें क्या शिप हुआ',
   fun_evo_title: '📈 एवोल्यूशन स्टोरीज़', fun_evo_sub: 'फ़ीचर्स जो साल भर में लेवल-अप हुए',
   fun_achieve_title: '🏆 अचीवमेंट अनलॉक्ड', fun_achieve_sub: 'साल की टॉप 6 पहल',
   ai_badge: '🤖 नई सुपरपावर — फ़रवरी \'26 से', ai_fun_title: 'AI आ गया मैदान में।',
@@ -1004,6 +1046,9 @@ const en = {
   stat_apps: 'Apps', stat_months: 'Months', stat_features: 'Solutions+', stat_verticals: 'Verticals',
   fun_timeline_title: '📅 The Journey, Month by Month', fun_timeline_sub: 'Click on a month to see what shipped',
   tab_partner: '🤝 Partner Side', tab_customer: '👤 Customer Side',
+  tabs_hint: '← switch to see both sides',
+  timeline_tap_hint: 'Tap any month below to see what was shipped',
+  timeline_empty: 'Pick a month above to explore what shipped',
   fun_evo_title: '📈 Evolution Stories', fun_evo_sub: 'Features that leveled up through the year',
   fun_achieve_title: '🏆 Achievement Unlocked', fun_achieve_sub: 'The Top 6 initiatives that defined the year',
   s_hero: 'Year-End Self-Assessment', s_subtitle: 'FY 2025–26 (April 2025 – March 2026)',
@@ -1180,6 +1225,20 @@ function enterMode(mode) {
     buildTimeline('partner');
     startCounters();
     setTimeout(() => triggerConfetti(), 800);
+    // Re-observe reveal elements and add scroll-based fallback
+    setTimeout(() => {
+      const checkReveals = () => {
+        document.querySelectorAll('#funMode .reveal:not(.visible)').forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 1.1 && rect.bottom > 0) {
+            el.classList.add('visible');
+            if (el.id === 'achievements-section' || el.id === 'ai-section') triggerConfetti();
+          }
+        });
+      };
+      checkReveals();
+      window.addEventListener('scroll', checkReveals, { passive: true });
+    }, 300);
   } else {
     document.getElementById('seriousMode').classList.add('active');
     document.getElementById('funMode').classList.remove('active');
@@ -1219,20 +1278,33 @@ function buildTimeline(side) {
   const data = side === 'partner' ? (isHi ? partnerDataHi : partnerData) : (isHi ? customerDataHi : customerData);
   const trackId = side + '-track';
   const detailId = side + '-detail';
+  const emptyId = side + '-empty';
   const track = document.getElementById(trackId);
   const detail = document.getElementById(detailId);
+  const empty = document.getElementById(emptyId);
   track.innerHTML = '';
   detail.classList.remove('show');
   detail.innerHTML = '';
+  if (empty) empty.style.display = 'block';
 
   data.forEach((m, i) => {
     const node = document.createElement('div');
-    node.className = 'timeline-node';
+    node.className = 'timeline-node' + (i === 0 ? ' first-hint' : '');
+    const count = m.items.length;
     node.innerHTML = `<div class="timeline-dot"></div><span class="timeline-month">${m.month}</span>`;
     node.addEventListener('click', () => {
+      // Hide instruction bar on first click
+      const instrEl = document.getElementById('timelineInstruction');
+      if (instrEl) instrEl.style.display = 'none';
+      // Hide empty state
+      if (empty) empty.style.display = 'none';
+      // Remove first-hint from all
+      track.querySelectorAll('.first-hint').forEach(n => n.classList.remove('first-hint'));
       track.querySelectorAll('.timeline-node').forEach(n => n.classList.remove('active'));
       node.classList.add('active');
-      detail.innerHTML = `<h3>${m.emoji} ${m.month} '${m.month === 'Jan' || m.month === 'Feb' || m.month === 'Mar' ? '26' : '25'}</h3><ul>${m.items.map(it => `<li>${it}</li>`).join('')}</ul>`;
+      const yr = (m.month === 'Jan' || m.month === 'Feb' || m.month === 'Mar' ||
+                  m.month === 'जनवरी' || m.month === 'फ़रवरी' || m.month === 'मार्च') ? '26' : '25';
+      detail.innerHTML = `<h3>${m.emoji} ${m.month} '${yr}</h3><ul>${m.items.map(it => `<li>${it}</li>`).join('')}</ul>`;
       detail.classList.add('show');
     });
     track.appendChild(node);
@@ -1244,6 +1316,9 @@ function switchTimelineTab(side, btn) {
   btn.classList.add('active');
   document.getElementById('timeline-partner').style.display = side === 'partner' ? 'block' : 'none';
   document.getElementById('timeline-customer').style.display = side === 'customer' ? 'block' : 'none';
+  // Show instruction bar again when switching tabs
+  const instrEl = document.getElementById('timelineInstruction');
+  if (instrEl) instrEl.style.display = 'flex';
   buildTimeline(side);
 }
 
