@@ -146,10 +146,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;o
 /* removed tabs hint */
 
 /* Timeline */
-.timeline-scroll{overflow-x:auto;padding:20px 0;margin-bottom:20px;-webkit-overflow-scrolling:touch}
-.timeline-track{display:flex;gap:0;min-width:max-content;position:relative;padding:0 20px}
-.timeline-track::before{content:'';position:absolute;top:36px;left:20px;right:20px;height:3px;background:linear-gradient(90deg,var(--fun-grad-1),var(--fun-grad-2),var(--fun-grad-3),var(--cyan));border-radius:2px}
-.timeline-node{display:flex;flex-direction:column;align-items:center;width:100px;cursor:pointer;position:relative;z-index:1;flex-shrink:0;padding-top:8px}
+.timeline-scroll{padding:20px 0;margin-bottom:20px;overflow:hidden}
+.timeline-track{display:flex;gap:0;position:relative;padding:0 4px;justify-content:space-between}
+.timeline-track::before{content:'';position:absolute;top:36px;left:4px;right:4px;height:3px;background:linear-gradient(90deg,var(--fun-grad-1),var(--fun-grad-2),var(--fun-grad-3),var(--cyan));border-radius:2px}
+.timeline-node{display:flex;flex-direction:column;align-items:center;flex:1;cursor:pointer;position:relative;z-index:1;padding-top:8px;min-width:0}
 .timeline-dot{width:24px;height:24px;border-radius:50%;background:var(--fun-card);border:3px solid var(--fun-grad-1);margin-bottom:12px;transition:all .3s;position:relative}
 .timeline-dot::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(102,126,234,.3);opacity:0;transition:opacity .3s}
 .timeline-node:hover .timeline-dot::after{opacity:1}
