@@ -172,6 +172,34 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;o
 .badge-card .badge-side{font-size:.75rem;color:var(--fun-grad-1);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
 .badge-card p{color:#999;font-size:.85rem;line-height:1.5}
 
+/* AI Section - Fun Mode */
+.ai-section-wrap{background:linear-gradient(135deg,rgba(102,126,234,.08),rgba(118,75,162,.08));border:1px solid rgba(102,126,234,.15);border-radius:20px;padding:36px;position:relative;overflow:hidden}
+.ai-section-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#00ff88,#00d4ff,#667eea,#764ba2)}
+.ai-glow{position:absolute;width:200px;height:200px;border-radius:50%;filter:blur(80px);opacity:.12;pointer-events:none}
+.ai-glow-1{background:#00ff88;top:-40px;right:-40px}
+.ai-glow-2{background:#00d4ff;bottom:-40px;left:-40px}
+.ai-badge-tag{display:inline-block;background:linear-gradient(135deg,#00ff88,#00d4ff);color:#0a0a1a;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:2px;padding:4px 12px;border-radius:20px;margin-bottom:16px}
+.ai-title{color:#fff;font-size:1.6rem;font-weight:800;margin-bottom:8px}
+.ai-subtitle{color:#999;font-size:.95rem;margin-bottom:28px}
+.ai-pillars{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.ai-pillar{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px;transition:all .4s;position:relative}
+.ai-pillar:hover{transform:translateY(-3px);border-color:rgba(0,255,136,.2);box-shadow:0 8px 30px rgba(0,255,136,.08)}
+.ai-pillar-icon{font-size:2rem;margin-bottom:10px;display:block}
+.ai-pillar h4{color:#fff;font-size:.95rem;margin-bottom:6px}
+.ai-pillar p{color:#888;font-size:.82rem;line-height:1.5}
+.ai-pillar-tag{display:inline-block;font-size:.6rem;color:#00ff88;background:rgba(0,255,136,.1);padding:2px 8px;border-radius:10px;margin-top:8px;text-transform:uppercase;letter-spacing:1px;font-weight:700}
+/* AI Section - Serious Mode */
+.s-ai-section{background:linear-gradient(135deg,#f0f9ff,#e8f4fd);border:2px solid #bde0fe;border-radius:12px;padding:32px;margin-top:16px}
+.s-ai-header{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.s-ai-header h3{color:#1a5276;font-size:1.2rem;margin:0}
+.s-ai-tag{background:#1a5276;color:#fff;font-size:.65rem;font-weight:700;padding:3px 10px;border-radius:12px;text-transform:uppercase;letter-spacing:1px}
+.s-ai-intro{color:#5d6d7e;font-size:.95rem;margin-bottom:20px;line-height:1.6}
+.s-ai-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.s-ai-card{background:#fff;border:1px solid #d6eaf8;border-radius:10px;padding:20px;transition:box-shadow .3s}
+.s-ai-card:hover{box-shadow:0 4px 20px rgba(26,82,118,.1)}
+.s-ai-card h4{color:#1a5276;font-size:.95rem;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.s-ai-card p{color:#5d6d7e;font-size:.85rem;line-height:1.5}
+
 /* Version Evolution */
 .evolution-item{background:var(--fun-card);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:24px;margin-bottom:16px}
 .evolution-item h4{color:#fff;font-size:1rem;margin-bottom:12px}
@@ -422,6 +450,43 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;o
     </div>
   </section>
 
+  <!-- AI-Powered Design Section -->
+  <section class="fun-section reveal" id="ai-section">
+    <div class="ai-section-wrap">
+      <div class="ai-glow ai-glow-1"></div>
+      <div class="ai-glow ai-glow-2"></div>
+      <div class="ai-badge-tag" data-i18n="ai_badge">🤖 New Superpower — Feb '26 Onwards</div>
+      <div class="ai-title" data-i18n="ai_fun_title">AI Entered the Chat.</div>
+      <div class="ai-subtitle" data-i18n="ai_fun_sub">From Feb '26, AI became a core part of the design-to-production pipeline — not a side experiment, but a daily tool reshaping how we ship.</div>
+      <div class="ai-pillars">
+        <div class="ai-pillar reveal">
+          <span class="ai-pillar-icon">🚀</span>
+          <h4 data-i18n="ai_p1_title">Direct Production Changes</h4>
+          <p data-i18n="ai_p1_desc">AI-assisted code changes pushed directly to production — no more waiting for dev cycles for design improvements. Faster iteration, real-time fixes.</p>
+          <span class="ai-pillar-tag" data-i18n="ai_p1_tag">Speed × Impact</span>
+        </div>
+        <div class="ai-pillar reveal">
+          <span class="ai-pillar-icon">🎨</span>
+          <h4 data-i18n="ai_p2_title">Production-Ready Front-End</h4>
+          <p data-i18n="ai_p2_desc">Created front-end experiences using AI that are directly usable with the production codebase — bridging the design-to-dev gap entirely.</p>
+          <span class="ai-pillar-tag" data-i18n="ai_p2_tag">Design → Code → Ship</span>
+        </div>
+        <div class="ai-pillar reveal">
+          <span class="ai-pillar-icon">📐</span>
+          <h4 data-i18n="ai_p3_title">Build-Spec Prototyping</h4>
+          <p data-i18n="ai_p3_desc">Prototyping now follows build-specs — structured rules and operating systems that ensure every solution is grounded in constraints, not just creativity.</p>
+          <span class="ai-pillar-tag" data-i18n="ai_p3_tag">Rules-First Design</span>
+        </div>
+        <div class="ai-pillar reveal">
+          <span class="ai-pillar-icon">✅</span>
+          <h4 data-i18n="ai_p4_title">Fully Automated UAT</h4>
+          <p data-i18n="ai_p4_desc">User Acceptance Testing is now fully automated — AI validates flows, catches regressions, and frees up cycles that were spent on manual testing.</p>
+          <span class="ai-pillar-tag" data-i18n="ai_p4_tag">Zero Manual QA</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </div>
 
 <!-- ======================================== -->
@@ -616,6 +681,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;o
     <!-- Timeline -->
     <div class="s-section">
       <h2 data-i18n="s_timeline_h2">C. Timeline Performance</h2>
+
       <ul class="s-timeline-list">
         <li>Delivered design work consistently every month for 12 consecutive months — no missed sprint cycles.</li>
         <li>Managed parallel workstreams across Customer App, Partner App, and Expert App simultaneously.</li>
@@ -625,9 +691,40 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;o
       </ul>
     </div>
 
+    <!-- AI-Powered Design -->
+    <div class="s-section">
+      <h2 data-i18n="s_ai_h2">D. AI-Powered Design Process (Feb '26 Onwards)</h2>
+      <div class="s-ai-section">
+        <div class="s-ai-header">
+          <h3 data-i18n="s_ai_title">Integrating AI into the Design-to-Production Pipeline</h3>
+          <span class="s-ai-tag">NEW</span>
+        </div>
+        <p class="s-ai-intro" data-i18n="s_ai_intro">Starting February 2026, AI tools were systematically integrated into the design workflow — not as experiments, but as core production tools. This marked a fundamental shift in how solutions are designed, validated, and shipped at Wiom.</p>
+        <div class="s-ai-grid">
+          <div class="s-ai-card">
+            <h4>🚀 <span data-i18n="s_ai_c1_title">Direct Production Changes</span></h4>
+            <p data-i18n="s_ai_c1_desc">AI-assisted modifications are now pushed directly to production code — enabling rapid design improvements and real-time fixes without waiting for traditional development cycles.</p>
+          </div>
+          <div class="s-ai-card">
+            <h4>🎨 <span data-i18n="s_ai_c2_title">Production-Ready Front-End</span></h4>
+            <p data-i18n="s_ai_c2_desc">Front-end experiences created using AI are directly compatible with the production codebase — effectively eliminating the design-to-development handoff gap.</p>
+          </div>
+          <div class="s-ai-card">
+            <h4>📐 <span data-i18n="s_ai_c3_title">Build-Spec Prototyping</span></h4>
+            <p data-i18n="s_ai_c3_desc">Prototyping now follows structured build-specifications and operating systems, ensuring every solution adheres to defined rules and constraints from the outset.</p>
+          </div>
+          <div class="s-ai-card">
+            <h4>✅ <span data-i18n="s_ai_c4_title">Fully Automated UAT</span></h4>
+            <p data-i18n="s_ai_c4_desc">User Acceptance Testing is now fully automated — AI validates user flows, catches regressions, and eliminates manual QA cycles, significantly accelerating the release process.</p>
+          </div>
+        </div>
+        <div class="s-impact" style="margin-top:20px"><strong>Impact:</strong> AI integration has compressed the design-to-ship cycle, improved solution quality through rules-based prototyping, and freed up significant capacity by automating testing — establishing a new standard for how design contributes to production velocity.</div>
+      </div>
+    </div>
+
     <!-- Key Highlights -->
     <div class="s-section">
-      <h2 data-i18n="s_highlights_h2">D. Key Highlights — Top Initiatives</h2>
+      <h2 data-i18n="s_highlights_h2">E. Key Highlights — Top Initiatives</h2>
       <table class="s-table">
         <thead><tr><th>#</th><th>Initiative</th><th>Side</th><th>Significance</th></tr></thead>
         <tbody>
@@ -667,13 +764,26 @@ const hi = {
   tab_partner: '🤝 पार्टनर साइड', tab_customer: '👤 कस्टमर साइड',
   fun_evo_title: '📈 एवोल्यूशन स्टोरीज़', fun_evo_sub: 'फ़ीचर्स जो साल भर में लेवल-अप हुए',
   fun_achieve_title: '🏆 अचीवमेंट अनलॉक्ड', fun_achieve_sub: 'साल की टॉप 6 पहल',
+  ai_badge: '🤖 नई सुपरपावर — फ़रवरी \'26 से', ai_fun_title: 'AI आ गया मैदान में।',
+  ai_fun_sub: 'फ़रवरी \'26 से AI डिज़ाइन-टू-प्रोडक्शन पाइपलाइन का हिस्सा बन गया — कोई साइड एक्सपेरिमेंट नहीं, बल्कि रोज़ का टूल।',
+  ai_p1_title: 'डायरेक्ट प्रोडक्शन चेंजेज़', ai_p1_desc: 'AI से सीधे प्रोडक्शन में बदलाव — डेव साइकल का इंतज़ार नहीं। तेज़ इटरेशन, रियल-टाइम फ़िक्सेज़।', ai_p1_tag: 'स्पीड × इम्पैक्ट',
+  ai_p2_title: 'प्रोडक्शन-रेडी फ़्रंट-एंड', ai_p2_desc: 'AI से बनाए गए फ़्रंट-एंड एक्सपीरियंसेज़ सीधे प्रोडक्शन कोड में यूज़ होते हैं — डिज़ाइन-टू-डेव गैप ख़त्म।', ai_p2_tag: 'डिज़ाइन → कोड → शिप',
+  ai_p3_title: 'बिल्ड-स्पेक प्रोटोटाइपिंग', ai_p3_desc: 'प्रोटोटाइपिंग अब बिल्ड-स्पेक्स फ़ॉलो करती है — नियम और OS तय करते हैं कि सॉल्यूशन सही फ़्रेमवर्क में बने।', ai_p3_tag: 'रूल्स-फ़र्स्ट डिज़ाइन',
+  ai_p4_title: 'पूरी तरह ऑटोमेटेड UAT', ai_p4_desc: 'UAT अब पूरी तरह ऑटोमेटेड — AI फ़्लोज़ वैलिडेट करता है, रिग्रेशन पकड़ता है, मैन्युअल टेस्टिंग की ज़रूरत ख़त्म।', ai_p4_tag: 'ज़ीरो मैन्युअल QA',
   // Serious
   s_hero: 'साल भर का सेल्फ़-असेसमेंट', s_subtitle: 'FY 2025–26 (अप्रैल 2025 – मार्च 2026)',
   s_overview: 'ओवरव्यू',
   s_partner_h2: 'A. पार्टनर / सप्लाई साइड उपलब्धियाँ',
   s_customer_h2: 'B. कस्टमर / डिमांड साइड उपलब्धियाँ',
   s_timeline_h2: 'C. टाइमलाइन परफ़ॉर्मेंस',
-  s_highlights_h2: 'D. मुख्य हाइलाइट्स — टॉप पहल',
+  s_ai_h2: 'D. AI-पावर्ड डिज़ाइन प्रोसेस (फ़रवरी \'26 से)',
+  s_ai_title: 'AI को डिज़ाइन-टू-प्रोडक्शन पाइपलाइन में इंटीग्रेट करना',
+  s_ai_intro: 'फ़रवरी 2026 से AI टूल्स को डिज़ाइन वर्कफ़्लो में व्यवस्थित रूप से शामिल किया गया — एक्सपेरिमेंट के रूप में नहीं, बल्कि कोर प्रोडक्शन टूल्स के रूप में। इसने Wiom में सॉल्यूशन डिज़ाइन, वैलिडेट और शिप करने के तरीके को मौलिक रूप से बदल दिया।',
+  s_ai_c1_title: 'डायरेक्ट प्रोडक्शन चेंजेज़', s_ai_c1_desc: 'AI-असिस्टेड बदलाव अब सीधे प्रोडक्शन कोड में पुश होते हैं — पारंपरिक डेवलपमेंट साइकल का इंतज़ार किए बिना तेज़ डिज़ाइन सुधार।',
+  s_ai_c2_title: 'प्रोडक्शन-रेडी फ़्रंट-एंड', s_ai_c2_desc: 'AI से बनाए गए फ़्रंट-एंड एक्सपीरियंसेज़ सीधे प्रोडक्शन कोडबेस के साथ कम्पैटिबल हैं — डिज़ाइन-टू-डेव हैंडऑफ़ गैप पूरी तरह ख़त्म।',
+  s_ai_c3_title: 'बिल्ड-स्पेक प्रोटोटाइपिंग', s_ai_c3_desc: 'प्रोटोटाइपिंग अब स्ट्रक्चर्ड बिल्ड-स्पेसिफ़िकेशन और OS फ़ॉलो करती है, जो सुनिश्चित करती है कि हर सॉल्यूशन शुरू से ही नियमों में बने।',
+  s_ai_c4_title: 'पूरी तरह ऑटोमेटेड UAT', s_ai_c4_desc: 'UAT अब पूरी तरह ऑटोमेटेड है — AI यूज़र फ़्लोज़ वैलिडेट करता है, रिग्रेशन पकड़ता है, और मैन्युअल QA साइकल ख़त्म।',
+  s_highlights_h2: 'E. मुख्य हाइलाइट्स — टॉप पहल',
   s_footer: 'असेसमेंट पीरियड: अप्रैल 2025 – मार्च 2026',
 };
 
@@ -694,7 +804,14 @@ const en = {
   s_partner_h2: 'A. Partner / Supply Side Achievements',
   s_customer_h2: 'B. Customer / Demand Side Achievements',
   s_timeline_h2: 'C. Timeline Performance',
-  s_highlights_h2: 'D. Key Highlights — Top Initiatives',
+  s_ai_h2: 'D. AI-Powered Design Process (Feb \'26 Onwards)',
+  s_ai_title: 'Integrating AI into the Design-to-Production Pipeline',
+  s_ai_intro: 'Starting February 2026, AI tools were systematically integrated into the design workflow — not as experiments, but as core production tools. This marked a fundamental shift in how solutions are designed, validated, and shipped at Wiom.',
+  s_ai_c1_title: 'Direct Production Changes', s_ai_c1_desc: 'AI-assisted modifications are now pushed directly to production code — enabling rapid design improvements and real-time fixes without waiting for traditional development cycles.',
+  s_ai_c2_title: 'Production-Ready Front-End', s_ai_c2_desc: 'Front-end experiences created using AI are directly compatible with the production codebase — effectively eliminating the design-to-development handoff gap.',
+  s_ai_c3_title: 'Build-Spec Prototyping', s_ai_c3_desc: 'Prototyping now follows structured build-specifications and operating systems, ensuring every solution adheres to defined rules and constraints from the outset.',
+  s_ai_c4_title: 'Fully Automated UAT', s_ai_c4_desc: 'User Acceptance Testing is now fully automated — AI validates user flows, catches regressions, and eliminates manual QA cycles, significantly accelerating the release process.',
+  s_highlights_h2: 'E. Key Highlights — Top Initiatives',
   s_footer: 'Assessment Period: April 2025 – March 2026',
 };
 
