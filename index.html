@@ -298,8 +298,89 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;o
   .stat-card{min-width:110px;padding:16px 20px}
   .badges-grid{grid-template-columns:1fr}
   .serious-hero h1{font-size:1.8rem}
+  .evo-detail{font-size:.8rem}
+  .achieve-progress{font-size:.8rem}
 }
-</style>
+
+/* ===== HERO: Floating Emoji Particles ===== */
+.fun-hero{position:relative}
+.emoji-particle{position:absolute;font-size:1.5rem;opacity:0;pointer-events:none;animation:floatUpParticle linear infinite;z-index:0}
+@keyframes floatUpParticle{0%{opacity:0;transform:translateY(0) scale(.6) rotate(0deg)}10%{opacity:.7}80%{opacity:.5}100%{opacity:0;transform:translateY(-80vh) scale(1) rotate(360deg)}}
+
+/* Hero gradient text animation */
+.fun-hero h1{background:linear-gradient(135deg,#667eea,#f093fb,#00e5ff,#ffd700,#667eea);background-size:400% 400%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:heroGradientShift 6s ease infinite}
+@keyframes heroGradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+/* Hero stat card glow on finish */
+.stat-card{position:relative}
+.stat-card.counted{border-color:rgba(102,126,234,.5);box-shadow:0 0 20px rgba(102,126,234,.25),0 0 40px rgba(102,126,234,.1);transition:border-color .6s,box-shadow .6s}
+.stat-card.counted .stat-number{text-shadow:0 0 12px currentColor}
+
+/* ===== TIMELINE: Ping Ripple ===== */
+.timeline-dot{position:relative}
+.timeline-node.active .timeline-dot::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--fun-grad-1);animation:pingRipple .8s ease-out;pointer-events:none}
+@keyframes pingRipple{0%{transform:scale(.5);opacity:1}100%{transform:scale(2.2);opacity:0}}
+
+/* Timeline: Shipped badge on dot */
+.shipped-badge{position:absolute;top:-18px;right:-12px;background:linear-gradient(135deg,var(--fun-grad-1),var(--fun-grad-2));color:#fff;font-size:.55rem;font-weight:800;padding:2px 5px;border-radius:8px;white-space:nowrap;line-height:1.2;pointer-events:none;z-index:2}
+
+/* Timeline: Glow track */
+.timeline-track::after{content:'';position:absolute;top:27px;left:20px;height:5px;background:linear-gradient(90deg,var(--fun-grad-1),var(--fun-grad-2));border-radius:3px;transition:width .5s ease;width:0;z-index:0;filter:blur(3px);opacity:.7}
+.timeline-track.glow-active::after{opacity:.7}
+
+/* Timeline: Typewriter heading */
+.timeline-detail h3{overflow:hidden;white-space:nowrap;border-right:2px solid var(--fun-grad-1);width:0;animation:typewriterExpand .6s ease forwards}
+@keyframes typewriterExpand{0%{width:0}100%{width:100%;border-right-color:transparent}}
+
+/* ===== EVOLUTION: Expandable + Level-Up ===== */
+.evolution-item{cursor:pointer;transition:all .4s}
+.evolution-item:hover{border-color:rgba(102,126,234,.3)}
+.evolution-item h4{display:flex;align-items:center;justify-content:space-between}
+.evo-expand-icon{color:#666;font-size:.75rem;transition:transform .3s;flex-shrink:0;margin-left:8px}
+.evolution-item.expanded .evo-expand-icon{transform:rotate(180deg)}
+.evo-detail{max-height:0;overflow:hidden;transition:max-height .4s ease,opacity .3s;opacity:0;color:#999;font-size:.85rem;line-height:1.6;margin-top:0}
+.evolution-item.expanded .evo-detail{max-height:400px;opacity:1;margin-top:12px}
+.evo-detail .evo-change{padding:8px 0;padding-left:20px;position:relative;border-left:2px solid rgba(102,126,234,.2)}
+.evo-detail .evo-change::before{content:'';position:absolute;left:-5px;top:14px;width:8px;height:8px;border-radius:50%;background:var(--fun-grad-1)}
+
+/* Evolution: Level-up step heights */
+.evo-step{transition:all .6s ease;opacity:.3}
+.evo-step.animate-in{opacity:1}
+.evolution-bar.level-up .evo-step:nth-child(1){height:8px}
+.evolution-bar.level-up .evo-step:nth-child(2){height:14px}
+.evolution-bar.level-up .evo-step:nth-child(3){height:22px}
+.evolution-bar.level-up .evo-step:nth-child(4){height:30px}
+.evolution-bar{align-items:flex-end}
+
+/* Evolution: Power-up glow */
+.evo-step.animate-in.filled{box-shadow:0 0 10px rgba(102,126,234,.5);filter:brightness(1.3)}
+
+/* ===== ACHIEVEMENTS: Locked State ===== */
+.achieve-progress{text-align:center;margin-bottom:24px;font-size:.9rem;color:#888;font-weight:600}
+.achieve-progress span{color:var(--gold);font-weight:800;font-size:1.1rem}
+
+.badge-card.locked{filter:grayscale(1) brightness(.5);transform:scale(.97);pointer-events:none}
+.badge-card.locked .badge-icon{position:relative}
+.badge-card.locked::after{content:'🔒';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:2rem;opacity:.6;z-index:2}
+.badge-card{position:relative}
+
+/* Achievement: Unlock animation */
+.badge-card.unlocking{animation:unlockBadge .6s ease forwards;filter:grayscale(0) brightness(1);pointer-events:auto}
+@keyframes unlockBadge{0%{filter:grayscale(1) brightness(.5);transform:scale(.97)}40%{filter:grayscale(0) brightness(1.5);transform:scale(1.06)}100%{filter:grayscale(0) brightness(1);transform:scale(1)}}
+
+.badge-card.unlocking::after{animation:lockFadeOut .3s ease forwards}
+@keyframes lockFadeOut{to{opacity:0;transform:translate(-50%,-50%) scale(2)}}
+
+/* Achievement: Shine sweep */
+.badge-card.unlocked::before{background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);width:100%;animation:shineSweep .8s ease .5s forwards;position:absolute;top:0;left:-100%;height:100%;z-index:3;pointer-events:none}
+@keyframes shineSweep{from{left:-100%}to{left:100%}}
+
+/* Achievement: Golden glow */
+.badge-card.unlocked{border-color:rgba(255,215,0,.3);box-shadow:0 0 20px rgba(255,215,0,.15)}
+
+/* Achievement: Icon bounce */
+.badge-card.unlocking .badge-icon{animation:iconBounce .6s ease .2s}
+@keyframes iconBounce{0%,100%{transform:translateY(0) scale(1)}30%{transform:translateY(-12px) scale(1.3)}60%{transform:translateY(2px) scale(.95)}}
 </head>
 <body>
 
@@ -395,17 +476,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;o
     <div class="fun-section-title" data-i18n="fun_evo_title">📈 Evolution Stories</div>
     <p class="fun-section-sub" data-i18n="fun_evo_sub">Features that leveled up through the year</p>
 
-    <div class="evolution-item">
-      <h4>🎰 Rohit Lottery — V1 → V3</h4>
+    <div class="evolution-item" onclick="toggleEvo(this)">
+      <h4>🎰 Rohit Lottery — V1 → V3 <span class="evo-expand-icon">▼</span></h4>
       <div class="evolution-bar">
         <div class="evo-step filled"></div>
         <div class="evo-step filled v2"></div>
         <div class="evo-step filled v3"></div>
       </div>
       <div class="evo-labels"><span>V1 · Simple Reward</span><span>V2 · Variable + Quality Gates</span><span>V3 · Traffic Light System</span></div>
+      <div class="evo-detail">
+        <div class="evo-change"><strong>V1 → V2:</strong> Moved from flat lottery on every task to variable rewards tied to optical power range and customer rating (3/5+). Added 2-per-day stacking incentives.</div>
+        <div class="evo-change"><strong>V2 → V3:</strong> Introduced the traffic-light system (Green/Yellow/Red) giving partners real-time visibility into eligibility. Shifted from "random reward" to "earned reward."</div>
+      </div>
     </div>
-    <div class="evolution-item">
-      <h4>📢 Full Page Notification (FPN) — V1 → V4</h4>
+    <div class="evolution-item" onclick="toggleEvo(this)">
+      <h4>📢 Full Page Notification (FPN) — V1 → V4 <span class="evo-expand-icon">▼</span></h4>
       <div class="evolution-bar">
         <div class="evo-step filled"></div>
         <div class="evo-step filled v2"></div>
@@ -413,18 +498,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;o
         <div class="evo-step filled v4"></div>
       </div>
       <div class="evo-labels"><span>V1 · Details</span><span>V2 · Map View</span><span>V3 · Distance Focus</span><span>V4 · Robust</span></div>
+      <div class="evo-detail">
+        <div class="evo-change"><strong>V1 → V2:</strong> Added map-based view showing lead position vs existing customers for proximity and density context.</div>
+        <div class="evo-change"><strong>V2 → V3:</strong> Simplified to the single most actionable data point — distance to nearest installation. Added cancel-prevention prompts.</div>
+        <div class="evo-change"><strong>V3 → V4:</strong> Improved transitions, handled fallback states, and ensured robustness across edge cases.</div>
+      </div>
     </div>
-    <div class="evolution-item">
-      <h4>⚡ ISP Recharge (H8) — V1 → V3 Agentic</h4>
+    <div class="evolution-item" onclick="toggleEvo(this)">
+      <h4>⚡ ISP Recharge (H8) — V1 → V3 Agentic <span class="evo-expand-icon">▼</span></h4>
       <div class="evolution-bar">
         <div class="evo-step filled"></div>
         <div class="evo-step filled v2"></div>
         <div class="evo-step filled v3"></div>
       </div>
       <div class="evo-labels"><span>V1 · Semi-Auto</span><span>V2 · Portal Preview</span><span>V3 · Fully Agentic</span></div>
+      <div class="evo-detail">
+        <div class="evo-change"><strong>V1 → V2:</strong> Added live preview of the H8 portal during transaction for transparency and confidence.</div>
+        <div class="evo-change"><strong>V2 → V3:</strong> Fully agentic flow where the system autonomously handles portal interaction — no manual steps needed.</div>
+      </div>
     </div>
-    <div class="evolution-item">
-      <h4>💰 PayG — Experiment → Full Pivot</h4>
+    <div class="evolution-item" onclick="toggleEvo(this)">
+      <h4>💰 PayG — Experiment → Full Pivot <span class="evo-expand-icon">▼</span></h4>
       <div class="evolution-bar">
         <div class="evo-step filled"></div>
         <div class="evo-step filled v2"></div>
@@ -432,6 +526,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;o
         <div class="evo-step filled v4"></div>
       </div>
       <div class="evo-labels"><span>Experiment</span><span>Diwali Offer</span><span>Full Pivot</span><span>Migration</span></div>
+      <div class="evo-detail">
+        <div class="evo-change"><strong>Experiment → Diwali Offer:</strong> Small 1/2/10-day plans tested with controlled group, then packaged as a festive offer for wider rollout.</div>
+        <div class="evo-change"><strong>Diwali Offer → Full Pivot:</strong> Core offering launched — Rs. 100 booking + Rs. 300 installation, recharge for any number of days.</div>
+        <div class="evo-change"><strong>Full Pivot → Migration:</strong> Existing customers migrated to the new PayG model with education and handholding.</div>
+      </div>
     </div>
   </section>
 
@@ -439,6 +538,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;o
   <section class="fun-section reveal" id="achievements-section">
     <div class="fun-section-title" data-i18n="fun_achieve_title">🏆 Achievement Unlocked</div>
     <p class="fun-section-sub" data-i18n="fun_achieve_sub">The Top 6 initiatives that defined the year</p>
+    <div class="achieve-progress" id="achieve-progress"><span id="achieve-count">0</span>/6 Unlocked</div>
     <div class="badges-grid">
       <div class="badge-card reveal">
         <span class="badge-icon">💎</span>
@@ -1255,6 +1355,194 @@ const terminalObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.3 });
 const termEl = document.getElementById('aiTerminal');
 if (termEl) terminalObserver.observe(termEl);
+
+// ===== HERO: FLOATING EMOJI PARTICLES =====
+const heroEmojis = ['🚀','💎','⚡','🎯','🛠️','💬'];
+function spawnHeroParticle() {
+  const hero = document.querySelector('.fun-hero');
+  if (!hero || currentMode !== 'fun') return;
+  const el = document.createElement('span');
+  el.className = 'emoji-particle';
+  el.textContent = heroEmojis[Math.floor(Math.random() * heroEmojis.length)];
+  el.style.left = Math.random() * 100 + '%';
+  el.style.bottom = '-40px';
+  el.style.fontSize = (1 + Math.random() * 1.5) + 'rem';
+  const dur = 6 + Math.random() * 8;
+  el.style.animationDuration = dur + 's';
+  el.style.animationDelay = '0s';
+  hero.appendChild(el);
+  setTimeout(() => el.remove(), dur * 1000);
+}
+let heroParticleInterval;
+function startHeroParticles() {
+  // spawn a few immediately
+  for (let i = 0; i < 5; i++) setTimeout(spawnHeroParticle, i * 400);
+  heroParticleInterval = setInterval(spawnHeroParticle, 1200);
+}
+function stopHeroParticles() {
+  clearInterval(heroParticleInterval);
+}
+
+// ===== HERO: GLOWING STAT CARDS ON COUNT FINISH =====
+// Patch startCounters to add glow after counting
+const _origStartCounters = startCounters;
+startCounters = function() {
+  document.querySelectorAll('.stat-number[data-target]').forEach(el => {
+    const target = parseInt(el.dataset.target);
+    let current = 0;
+    const step = Math.max(1, Math.floor(target / 40));
+    const interval = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        current = target;
+        clearInterval(interval);
+        // Add glow to card
+        const card = el.closest('.stat-card');
+        if (card) setTimeout(() => card.classList.add('counted'), 100);
+      }
+      el.textContent = current + (el.closest('.stat-card').querySelector('.stat-label').textContent.includes('Solutions') || el.closest('.stat-card').querySelector('.stat-label').textContent.includes('सॉल्यूशन') ? '+' : '');
+    }, 40);
+  });
+  startHeroParticles();
+};
+
+// ===== TIMELINE: SHIPPED BADGES + GLOW TRACK =====
+const _origBuildTimeline = buildTimeline;
+buildTimeline = function(side) {
+  const isHi = currentLang === 'hi';
+  const data = side === 'partner' ? (isHi ? partnerDataHi : partnerData) : (isHi ? customerDataHi : customerData);
+  const trackId = side + '-track';
+  const detailId = side + '-detail';
+  const track = document.getElementById(trackId);
+  const detail = document.getElementById(detailId);
+  track.innerHTML = '';
+  detail.classList.remove('show');
+  detail.innerHTML = '';
+  track.classList.remove('glow-active');
+  track.style.setProperty('--glow-width', '0px');
+
+  data.forEach((m, i) => {
+    const node = document.createElement('div');
+    node.className = 'timeline-node';
+    node.style.position = 'relative';
+    // Shipped badge
+    const badgeCount = m.items.length;
+    node.innerHTML = `<div class="timeline-dot"></div><span class="shipped-badge">${badgeCount} 🚀</span><span class="timeline-month">${m.month}</span>`;
+    node.addEventListener('click', () => {
+      track.querySelectorAll('.timeline-node').forEach(n => n.classList.remove('active'));
+      node.classList.add('active');
+      // Glow track up to this node
+      const nodeRect = node.getBoundingClientRect();
+      const trackRect = track.getBoundingClientRect();
+      const glowWidth = nodeRect.left - trackRect.left + nodeRect.width / 2;
+      track.classList.add('glow-active');
+      track.style.setProperty('--glow-width', glowWidth + 'px');
+      // Use CSS variable for width
+      const afterStyle = document.getElementById('dynamic-glow-style') || document.createElement('style');
+      afterStyle.id = 'dynamic-glow-style';
+      afterStyle.textContent = `#${trackId}.glow-active::after{width:${glowWidth}px !important}`;
+      document.head.appendChild(afterStyle);
+      // Typewriter detail
+      const yearSuffix = (m.month === 'Jan' || m.month === 'Feb' || m.month === 'Mar' || m.month === 'जनवरी' || m.month === 'फ़रवरी' || m.month === 'मार्च') ? '26' : '25';
+      detail.innerHTML = `<h3>${m.emoji} ${m.month} '${yearSuffix}</h3><ul>${m.items.map(it => `<li>${it}</li>`).join('')}</ul>`;
+      detail.classList.add('show');
+    });
+    track.appendChild(node);
+  });
+};
+
+// ===== EVOLUTION: TOGGLE EXPAND =====
+function toggleEvo(item) {
+  const wasExpanded = item.classList.contains('expanded');
+  // Close all
+  document.querySelectorAll('.evolution-item').forEach(e => e.classList.remove('expanded'));
+  if (!wasExpanded) item.classList.add('expanded');
+}
+
+// ===== EVOLUTION: SCROLL-TRIGGERED SEQUENTIAL FILL ANIMATION =====
+const evoObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const bar = entry.target.querySelector('.evolution-bar');
+      if (bar && !bar.classList.contains('level-up')) {
+        bar.classList.add('level-up');
+        const steps = bar.querySelectorAll('.evo-step');
+        steps.forEach((step, i) => {
+          setTimeout(() => {
+            step.classList.add('animate-in');
+          }, i * 300);
+        });
+      }
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.evolution-item').forEach(item => evoObserver.observe(item));
+
+// ===== ACHIEVEMENTS: LOCKED CARDS + SCROLL UNLOCK =====
+let achieveUnlockCount = 0;
+const totalBadges = 6;
+
+// Initialize badges as locked
+function initAchievements() {
+  const badges = document.querySelectorAll('.badges-grid .badge-card');
+  badges.forEach(card => {
+    card.classList.add('locked');
+    card.classList.remove('unlocking', 'unlocked');
+  });
+  achieveUnlockCount = 0;
+  const counter = document.getElementById('achieve-count');
+  if (counter) counter.textContent = '0';
+}
+
+// Observe each badge card for scroll unlock
+const badgeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && entry.target.classList.contains('locked')) {
+      const card = entry.target;
+      const allLocked = document.querySelectorAll('.badges-grid .badge-card.locked');
+      // Find index among currently locked cards to stagger
+      let idx = 0;
+      allLocked.forEach((c, i) => { if (c === card) idx = i; });
+      setTimeout(() => {
+        card.classList.remove('locked');
+        card.classList.add('unlocking');
+        achieveUnlockCount++;
+        const counter = document.getElementById('achieve-count');
+        if (counter) counter.textContent = achieveUnlockCount;
+        // After unlock animation, set to unlocked state
+        setTimeout(() => {
+          card.classList.remove('unlocking');
+          card.classList.add('unlocked');
+        }, 700);
+      }, idx * 350);
+    }
+  });
+}, { threshold: 0.2 });
+
+// Re-init achievements when entering fun mode
+const _origEnterMode = enterMode;
+enterMode = function(mode) {
+  _origEnterMode(mode);
+  if (mode === 'fun') {
+    initAchievements();
+    // Re-observe badges after they're visible
+    setTimeout(() => {
+      document.querySelectorAll('.badges-grid .badge-card').forEach(card => {
+        badgeObserver.observe(card);
+      });
+      // Re-observe evolution items
+      document.querySelectorAll('.evolution-item').forEach(item => {
+        const bar = item.querySelector('.evolution-bar');
+        if (bar) {
+          bar.classList.remove('level-up');
+          bar.querySelectorAll('.evo-step').forEach(s => s.classList.remove('animate-in'));
+        }
+        evoObserver.observe(item);
+      });
+    }, 200);
+  }
+};
 </script>
 
 </body>
